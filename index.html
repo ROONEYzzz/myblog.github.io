@@ -146,6 +146,106 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Vue响应式原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/myblog.github.io/2021/08/05/Vue%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/">Vue响应式原理</a>
+    </h1>
+  
+
+        
+        <a href="/myblog.github.io/2021/08/05/Vue%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/" class="archive-article-date">
+  	<time datetime="2021-08-05T15:09:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、概要"><a href="#一、概要" class="headerlink" title="一、概要"></a>一、概要</h2><p>响应式原理的表现形式： 数据更新时视图也跟着更新。</p>
+<p>优点： 避免了繁琐的DOM操作，只需要进行数据的管理。</p>
+<p>Vue响应式实现原理：通过1.Object.defineProperty方法中的getter，setter 2.观察者模式 来实现。</p>
+<h2 id="二、前置知识"><a href="#二、前置知识" class="headerlink" title="二、前置知识"></a>二、前置知识</h2><h4 id="1-Object-defineProperty："><a href="#1-Object-defineProperty：" class="headerlink" title="1.Object.defineProperty："></a>1.Object.defineProperty：</h4><p>这个方法就是在一个对象上定义一个新的属性，或者改变一个对象现有的属性，并且返回这个对象。其中get字段为获取属性的值，set字段为设置属性的值。</p>
+<p>举例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">&quot;b&quot;</span>, &#123;</span><br><span class="line">  <span class="attr">get</span> : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;监听正在获取b&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> value;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">set</span> : <span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;监听正在设置b&#x27;</span>)</span><br><span class="line">    value = newValue;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">enumerable</span> : <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">configurable</span> : <span class="literal">true</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">obj.b = <span class="number">38</span>;</span><br><span class="line"><span class="built_in">console</span>.log(obj.b)</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">监听正在设置b</span><br><span class="line">监听正在获取b</span><br><span class="line"><span class="number">38</span></span><br><span class="line">当对 obj.b 赋值<span class="number">38</span>的时候，就会调用set函数，这时候给value赋值，之后就可以通过obj.b来获取这个值，这时候，get函数被调用。</span><br></pre></td></tr></table></figure>
+
+<p>Vue通过这个原理，给data中的所有属性加上了get，set。</p>
+<h4 id="2-观察者模式"><a href="#2-观察者模式" class="headerlink" title="2.观察者模式"></a>2.观察者模式</h4><p>观察者模式分为注册环节和发布环节。</p>
+<p>比如淘宝上购买商品，但是该商品缺货，买家如何知道货到了呢？第一种方法：买家每过一段时间就去向卖家询问是否到货。这种方法十分麻烦且浪费资源。 而观察者模式是：买家提交自己的联系方式进行预约（这就是注册），当有货时卖家群发到货通知（这就是发布）。</p>
+<h2 id="三、响应式原理解析"><a href="#三、响应式原理解析" class="headerlink" title="三、响应式原理解析"></a>三、响应式原理解析</h2><p><img src="https://pic1.zhimg.com/v2-6abd75e4c9f312059482eeb7917ff84c_r.jpg" alt="preview"></p>
+<p>以上是官方的过程图。</p>
+<p>可以分解成三步：</p>
+<p><strong>1.init阶段</strong></p>
+<p>Vue的data属性全部加上getter/setter。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> dep = <span class="keyword">new</span> Dep()</span><br><span class="line">Dep为一个观察者，每一个data属性会有一个dep对象，get调用时就去dep中注册函数，set调用时就去通知注册函数</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.mount阶段</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Watcher</span></span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建一个Watcher类的对象。这个Watcher实际上是连接Vue组件与Dep的桥梁。每一个Watcher对应一个vue component。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">而render函数里，会访问data的属性，比如</span><br></pre></td></tr></table></figure>
+
+<p>render: function (createElement) {</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> createElement(<span class="string">&#x27;h1&#x27;</span>, <span class="built_in">this</span>.name)</span><br><span class="line">&#125;</span><br><span class="line">此时会去调用这个属性blogTitle的getter函数。</span><br></pre></td></tr></table></figure>
+
+<p>这里做的事情就是给name注册了Watcher这个对象。这样每次render一个vue 组件的时候，如果这个组件用到了name，那么这个组件相对应的Watcher对象都会被注册到name的Dep中。这个过程就叫做依赖收集。</p>
+<p>收集完所有依赖name属性的组件所对应的Watcher之后，当它发生改变的时候，就会去通知Watcher更新关联的组件。</p>
+<p><strong>3.update阶段</strong></p>
+<p>当name 发生改变的时候，就去调用Dep的notify函数,然后通知所有的Watcher调用update函数更新。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">notify () &#123;</span><br><span class="line">    <span class="keyword">const</span> subs = <span class="built_in">this</span>.subs.slice()</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, l = subs.length; i &lt; l; i++) &#123;</span><br><span class="line">      subs[i].update()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id><a href="#" class="headerlink" title="``"></a>``</h2><h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><p>因此Vue的数据响应式原理总结起来就是：</p>
+<p>组件初始化的时候，先给每一个Data属性都注册getter，setter。然后再new 一个自己的Watcher对象，此时watcher会立即调用组件的render函数去生成虚拟DOM。在调用render的时候，就会需要用到data的属性值，此时会触发getter函数，将当前的Watcher函数注册进一个对象A里。</p>
+<p>当data属性发生改变时，遍历这个对象A中所有的watcher对象，通知他们去重新渲染组件</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/myblog.github.io/2021/08/05/Vue%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-获取url参数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
