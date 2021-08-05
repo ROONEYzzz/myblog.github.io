@@ -78,7 +78,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/myblog.github.io/2021/08/05/first-blog/">first-blog</a>
+      <a class="article-title" href="/myblog.github.io/2021/08/05/first-blog/">First-Blog</a>
     </h1>
   
 
@@ -86,60 +86,35 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h3 id="hexo搭建步骤-amp-避坑"><a href="#hexo搭建步骤-amp-避坑" class="headerlink" title="hexo搭建步骤&amp;避坑"></a>hexo搭建步骤&amp;避坑</h3><h4 id="一、构建本地hexo"><a href="#一、构建本地hexo" class="headerlink" title="一、构建本地hexo"></a>一、构建本地hexo</h4><p><code>npm install hexo -g</code></p>
+<p><code>hexo init</code></p>
+<p><code>npm install</code></p>
+<p><code>hexo g</code></p>
+<p><code>hexo s</code></p>
+<p>打开本地浏览器即可查看</p>
+<h4 id="二、发布到github-pages"><a href="#二、发布到github-pages" class="headerlink" title="二、发布到github pages"></a>二、发布到github pages</h4><p>1.绑定github：</p>
+<p><code>git config --global user.name &quot;&quot;</code></p>
+<p><code>git config --global user.email &quot;&quot;</code></p>
+<p>2.添加密钥：</p>
+<p><code>eval &quot;$(ssh-agent -s)&quot;</code>  添加密钥到ssh-agent</p>
+<p><code>ssh-add ~/.ssh/id_rsa</code>    添加生成的SSH key到ssh-agent</p>
+<p>3.在github上配置ssh：</p>
+<p><img src="C:\Users\hp\AppData\Roaming\Typora\typora-user-images\image-20210805110917538.png" alt="image-20210805110917538"></p>
+<p>新建一个new ssh key，将id_rsa.pub文件里的内容复制上去</p>
+<p><code>ssh -T git@github.com</code> 测试是否添加成功</p>
+<p>4.配置_config.yml：</p>
+<p>修改repo值： type,repository(值为github上ssh的路径),branch</p>
+<p>修改url（github pages分配的url），root（项目名）（！！！项目名后缀最好为.github.io）</p>
+<p>(不设置url和root，本地可以运行，线上运行无法加载css和js)</p>
+<p>5.部署前安装扩展：</p>
+<p><code>npm install hexo-deployer-git --save</code></p>
+<p>6.部署发布：</p>
+<p><code>hexo d -g</code></p>
+
       
     </div>
     <footer class="article-footer">
       <a data-url="https://rooneyzzz.github.io/myblog.github.io/2021/08/05/first-blog/" data-id="ckryc0al00000lovc60tm4vv3" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/myblog.github.io/2021/08/05/hello-world/" class="article-date">
-  <time datetime="2021-08-05T02:15:19.559Z" itemprop="datePublished">2021-08-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/myblog.github.io/2021/08/05/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://rooneyzzz.github.io/myblog.github.io/2021/08/05/hello-world/" data-id="ckryc0ala0001lovc38fd7140" class="article-share-link">Share</a>
       
       
     </footer>
@@ -180,11 +155,7 @@
       <ul>
         
           <li>
-            <a href="/myblog.github.io/2021/08/05/first-blog/">first-blog</a>
-          </li>
-        
-          <li>
-            <a href="/myblog.github.io/2021/08/05/hello-world/">Hello World</a>
+            <a href="/myblog.github.io/2021/08/05/first-blog/">First-Blog</a>
           </li>
         
       </ul>
