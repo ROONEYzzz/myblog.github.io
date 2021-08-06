@@ -170,85 +170,7 @@
 <p>状态管理： 理解为把需要多个组件共享的变量全部存储在一个对象里。 将该对象放入顶层vue实例中，让其他组件可以使用。（因此多个组件可以共享该对象的所有变量属性）</p>
 <p>优点： 如果自己封装这个对象，不能做到响应式，而vuejs最大的优势就是响应式，vuex可以达到这个效果</p>
 <p>vuex使用场景： 需要共享的状态信息：如用户登陆状态，购物车收藏等</p>
-<p><strong>一、安装</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install vuex --save</span><br><span class="line">一般在src下创建一个store来存放vuex相关代码（不在main.js中直接调用，不然main会越来越大）</span><br></pre></td></tr></table></figure>
-
-<p>store文件夹下index.js：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">import Vue from <span class="string">&#x27;vue&#x27;</span></span><br><span class="line">import Vuex from <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line"></span><br><span class="line">//1.安装插件</span><br><span class="line">Vue.use(Vuex)</span><br><span class="line">//2.创建对象</span><br><span class="line">const store = new Vuex.Store(&#123;</span><br><span class="line">state: &#123;</span><br><span class="line">//需要共享的状态变量</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">mutations: &#123;</span><br><span class="line">//同步操作，并有Devtools来记录状态的改变</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">actions: &#123;</span><br><span class="line">//有异步操作时提交到actions中来做（如发送网络请求等）</span><br><span class="line">&#125;,</span><br><span class="line">getters: &#123;</span><br><span class="line"></span><br><span class="line">//可以理解为computed，可以缓存的计算属性</span><br><span class="line"></span><br><span class="line">&#125;,</span><br><span class="line">modules: &#123;</span><br><span class="line"></span><br><span class="line">&#125;,</span><br><span class="line">&#125;)</span><br><span class="line">//3.导出</span><br><span class="line"><span class="built_in">export</span> default store</span><br></pre></td></tr></table></figure>
-
-
-<p>main.js中调用vuex</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import store from <span class="string">&#x27;./store&#x27;</span></span><br><span class="line"></span><br><span class="line">Vue.prototype.<span class="variable">$store</span> = store</span><br></pre></td></tr></table></figure>
-<p><strong>二、使用流程图</strong></p>
-<img src="/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/liuchengtu.png" class title="liuchengtu">
-
-<p>以上是官方建议的使用流程，实际中可以直接用$store.state.xxx来修改状态（调用状态可以直接使用），但是不推荐（原因：当多个组件使用$store.state.来修改同一个状态时，无法跟踪是哪一个组件进行的修改）</p>
-<p>为了解决上述问题，使用Devtools</p>
-<p>Devtools：vuex官方的浏览器插件，可以每次记录state的改变（因此修改状态建议通过mutations修改）（在chome商店中下载添加）</p>
-<p>state单一状态树：所有的状态变量都写入一个store，便于管理，全部使用$store调用即可</p>
-<p><strong>mutations使用步骤（同步方法）：</strong></p>
-<p>1.在store里的mutations中写入方法，state中写入需要共享的状态变量</p>
-<p>2.在需要用到该状态的组件methods中 调用this.$store.commit来获取mutations中定义的方法</p>
-<p><strong>actions使用步骤（异步方法）：</strong></p>
-<p>1.在store里的actions中写入异步方法</p>
-<p>2.在需要用到该状态的组件methods中 调用this.$store.dispatch来获取actions中定义的方法</p>
-<p><strong>modules使用方法：</strong></p>
-<p>当所有状态全写入state，state过于臃肿，modules用于抽离，modules中定义的对象，内置可以设置state，mutations，getters，actions。不建议再嵌套modules，不然vuex反而使用麻烦。</p>
-<p><strong>项目结构</strong></p>
-<p>建议把state，mutations，getters，actions单独写成js文件放在store下，单独创建一个modules文件夹存储modules。这样就不用全写在index里了。</p>
-<p><strong>三、实践（mutation&amp;state）</strong></p>
-<p>在mutations中添加方法：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mutations: &#123;</span><br><span class="line">//同步操作，并有Devtools来记录状态的改变</span><br><span class="line">//自动传入参数state</span><br><span class="line">increment(state ) &#123;</span><br><span class="line">state.counter++</span><br><span class="line">&#125;,</span><br><span class="line">decrement(state) &#123;</span><br><span class="line">state.counter--</span><br><span class="line">&#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-<p>组件中显示counter：</p>
-<p><code>&lt;h2&gt;&#123;&#123;$store.state.counter&#125;&#125;&lt;/h2&gt;</code></p>
-<p>app.vue中显示counter：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;h2&gt;&#123;&#123;<span class="variable">$store</span>.state.counter&#125;&#125;&lt;/h2&gt;</span><br><span class="line"></span><br><span class="line">&lt;button @click=<span class="string">&quot;plus&quot;</span>&gt;+&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">&lt;button @click=<span class="string">&quot;minus&quot;</span>&gt;-&lt;/button&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;hellovuex&gt;&lt;/hellovuex&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">methods: &#123;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">plus</span></span>() &#123;</span><br><span class="line">this.<span class="variable">$store</span>.commit(<span class="string">&#x27;increment&#x27;</span>)</span><br><span class="line">&#125;,</span><br><span class="line"><span class="function"><span class="title">minus</span></span>() &#123;</span><br><span class="line">this.<span class="variable">$store</span>.commit(<span class="string">&#x27;decrement&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>实现效果：</p>
-<img src="/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/scshot1.png" class title="scshot1">
-
-<ul>
-<li><ul>
-<li>app.vue和hellovuex组件的counter显示是同步响应式的</li>
-</ul>
-</li>
-</ul>
-<p>如果直接调用$store.state.counter++ 则在devtools下可以发现，状态并不会被记录改变</p>
-<p>但是把方法写入mutations 可以关测到事件：</p>
-<img src="/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/scshot2.png" class title="scshot2">
-
-
-
-<p><strong>四、实践（getters）</strong></p>
-<p>在getters中添加方法：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">getters: &#123;</span><br><span class="line">//可以理解为computed，可以缓存的计算属性</span><br><span class="line">powerCounter(state) &#123;</span><br><span class="line"><span class="built_in">return</span> state.counter*state.counter</span><br><span class="line">&#125;，</span><br><span class="line"></span><br><span class="line">triple(state,getters)&#123;</span><br><span class="line">//第二个参数用于方便调用getters中其他的方法</span><br><span class="line"><span class="built_in">return</span> getters.powerCounter * state.counter</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-<p>组件中直接调用：</p>
-<p><code>&lt;h2&gt;&#123;&#123;$store.getters.powerCounter&#125;&#125;&lt;/h2&gt;</code></p>
-<p>结果：</p>
-<img src="/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/scshot3.png" class title="scshot3">
-
-<p><strong>五、实践（mutations细节）</strong></p>
-<p>1.可以传入动态参数：</p>
-<p>store中添加：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plusCount(state,count) &#123;</span><br><span class="line">state.counter += count</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-<p>app.vue中添加methods：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">addCount(count) &#123;</span><br><span class="line"></span><br><span class="line">//mutations传入的第二个参数称之为playload载荷</span><br><span class="line"></span><br><span class="line">this.<span class="variable">$store</span>.commit(<span class="string">&#x27;plusCount&#x27;</span>,count)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-<p>app.vue中添加显示按钮：</p>
-<p><code>&lt;button @click=&quot;addCount(5)&quot;&gt;+5&lt;/button&gt;</code></p>
-
-
-<p>2.mutations变量常量</p>
-<p>因为使用mutations建立函数在其他组件中commit使用时还需要复制粘贴，较为麻烦，因此在store中单独建立一个js文件，存放常量：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">mutations-type.js：</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> const PLUS = <span class="string">&#x27;increment&#x27;</span></span><br><span class="line"></span><br><span class="line">index.js：</span><br><span class="line"></span><br><span class="line">import &#123; PLUS &#125; from <span class="string">&#x27;./mutations-type&#x27;</span>;</span><br><span class="line"></span><br><span class="line">[PLUS](state) &#123; //使用mutations变量常量避免拼写出错</span><br><span class="line">state.counter++</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">app.vue：</span><br><span class="line"></span><br><span class="line">import &#123;PLUS&#125; from <span class="string">&#x27;./store/mutations-type&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">plus</span></span>() &#123;</span><br><span class="line">this.<span class="variable">$store</span>.commit(PLUS)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这样就统一使用PLUS 而不用重复写increment了，由于有import，因此可以自动补全。</p>
-<p><strong>六、实践（actions）</strong></p>
-<p>使用actions原因：在mutations中如果做异步操作，devtools无法追踪数据的变更。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">index.js：</span><br><span class="line"></span><br><span class="line">//默认参数为context，不是state了</span><br><span class="line">UpdateInfo(context) &#123;</span><br><span class="line">setTimeout(() =&gt; &#123;</span><br><span class="line">context.commit(<span class="string">&#x27;decrement&#x27;</span>)</span><br><span class="line">&#125;,1000)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">App.vue：</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">updateInfo</span></span>() &#123;</span><br><span class="line">this.<span class="variable">$store</span>.dispatch(<span class="string">&#x27;UpdateInfo&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>实现隔一秒counter减1，devtools中也可以跟踪到。</p>
-<p><strong>七、实践（modules）</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">index.js：</span><br><span class="line"></span><br><span class="line">modules: &#123;//用于抽离</span><br><span class="line">a: &#123;</span><br><span class="line">state: &#123;</span><br><span class="line">name: <span class="string">&#x27;zrj&#x27;</span>,</span><br><span class="line">&#125;,</span><br><span class="line">mutations: &#123;</span><br><span class="line">updatename(state,newname) &#123;</span><br><span class="line">[state.name](http://state.name/) = newname</span><br><span class="line">&#125;</span><br><span class="line">&#125;,</span><br><span class="line">getters: &#123;&#125;,</span><br><span class="line">actions: &#123;&#125;,</span><br><span class="line">&#125;</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">app.vue：</span><br><span class="line"></span><br><span class="line">`&lt;h2&gt;&#123;&#123;$[store.state.a.name](http://store.state.a.name/)&#125;&#125;&lt;/h2&gt;`</span><br><span class="line"></span><br><span class="line">&lt;button @click=<span class="string">&quot;updatename&quot;</span>&gt;修改名字&lt;/button&gt;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">updatename</span></span>() &#123;</span><br><span class="line">this.<span class="variable">$store</span>.commit(<span class="string">&#x27;updatename&#x27;</span>,<span class="string">&#x27;zhangruijie&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可见如果要调用modules中的state，在组件中需要加个.modules名称</p>
-<p>modules中的其他字段如mutations等，使用和外层是一样的，区别就是，modules中的mutations等只能调模块内的state。</p>
-
+        
       
 
       
@@ -313,42 +235,7 @@
         <h2 id="一、概要"><a href="#一、概要" class="headerlink" title="一、概要"></a>一、概要</h2><p>响应式原理的表现形式： 数据更新时视图也跟着更新。</p>
 <p>优点： 避免了繁琐的DOM操作，只需要进行数据的管理。</p>
 <p>Vue响应式实现原理：通过1.Object.defineProperty方法中的getter，setter 2.观察者模式 来实现。</p>
-<h2 id="二、前置知识"><a href="#二、前置知识" class="headerlink" title="二、前置知识"></a>二、前置知识</h2><h4 id="1-Object-defineProperty："><a href="#1-Object-defineProperty：" class="headerlink" title="1.Object.defineProperty："></a>1.Object.defineProperty：</h4><p>这个方法就是在一个对象上定义一个新的属性，或者改变一个对象现有的属性，并且返回这个对象。其中get字段为获取属性的值，set字段为设置属性的值。</p>
-<p>举例：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">&quot;b&quot;</span>, &#123;</span><br><span class="line">  <span class="attr">get</span> : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;监听正在获取b&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> value;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">set</span> : <span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;监听正在设置b&#x27;</span>)</span><br><span class="line">    value = newValue;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">enumerable</span> : <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">configurable</span> : <span class="literal">true</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">obj.b = <span class="number">38</span>;</span><br><span class="line"><span class="built_in">console</span>.log(obj.b)</span><br></pre></td></tr></table></figure>
-
-<p>输出结果为：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">监听正在设置b</span><br><span class="line">监听正在获取b</span><br><span class="line"><span class="number">38</span></span><br><span class="line">当对 obj.b 赋值<span class="number">38</span>的时候，就会调用set函数，这时候给value赋值，之后就可以通过obj.b来获取这个值，这时候，get函数被调用。</span><br></pre></td></tr></table></figure>
-
-<p>Vue通过这个原理，给data中的所有属性加上了get，set。</p>
-<h4 id="2-观察者模式"><a href="#2-观察者模式" class="headerlink" title="2.观察者模式"></a>2.观察者模式</h4><p>观察者模式分为注册环节和发布环节。</p>
-<p>比如淘宝上购买商品，但是该商品缺货，买家如何知道货到了呢？第一种方法：买家每过一段时间就去向卖家询问是否到货。这种方法十分麻烦且浪费资源。 而观察者模式是：买家提交自己的联系方式进行预约（这就是注册），当有货时卖家群发到货通知（这就是发布）。</p>
-<h2 id="三、响应式原理解析"><a href="#三、响应式原理解析" class="headerlink" title="三、响应式原理解析"></a>三、响应式原理解析</h2><p><img src="https://pic1.zhimg.com/v2-6abd75e4c9f312059482eeb7917ff84c_r.jpg" alt="preview"></p>
-<p>以上是官方的过程图。</p>
-<p>可以分解成三步：</p>
-<p><strong>1.init阶段</strong></p>
-<p>Vue的data属性全部加上getter/setter。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> dep = <span class="keyword">new</span> Dep()</span><br><span class="line">Dep为一个观察者，每一个data属性会有一个dep对象，get调用时就去dep中注册函数，set调用时就去通知注册函数</span><br></pre></td></tr></table></figure>
-
-<p><strong>2.mount阶段</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Watcher</span></span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
-
-<p>创建一个Watcher类的对象。这个Watcher实际上是连接Vue组件与Dep的桥梁。每一个Watcher对应一个vue component。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">而render函数里，会访问data的属性，比如</span><br></pre></td></tr></table></figure>
-
-<p>render: function (createElement) {</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> createElement(<span class="string">&#x27;h1&#x27;</span>, <span class="built_in">this</span>.name)</span><br><span class="line">&#125;</span><br><span class="line">此时会去调用这个属性blogTitle的getter函数。</span><br></pre></td></tr></table></figure>
-
-<p>这里做的事情就是给name注册了Watcher这个对象。这样每次render一个vue 组件的时候，如果这个组件用到了name，那么这个组件相对应的Watcher对象都会被注册到name的Dep中。这个过程就叫做依赖收集。</p>
-<p>收集完所有依赖name属性的组件所对应的Watcher之后，当它发生改变的时候，就会去通知Watcher更新关联的组件。</p>
-<p><strong>3.update阶段</strong></p>
-<p>当name 发生改变的时候，就去调用Dep的notify函数,然后通知所有的Watcher调用update函数更新。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">notify () &#123;</span><br><span class="line">    <span class="keyword">const</span> subs = <span class="built_in">this</span>.subs.slice()</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, l = subs.length; i &lt; l; i++) &#123;</span><br><span class="line">      subs[i].update()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id><a href="#" class="headerlink" title="``"></a>``</h2><h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><p>因此Vue的数据响应式原理总结起来就是：</p>
-<p>组件初始化的时候，先给每一个Data属性都注册getter，setter。然后再new 一个自己的Watcher对象，此时watcher会立即调用组件的render函数去生成虚拟DOM。在调用render的时候，就会需要用到data的属性值，此时会触发getter函数，将当前的Watcher函数注册进一个对象A里。</p>
-<p>当data属性发生改变时，遍历这个对象A中所有的watcher对象，通知他们去重新渲染组件</p>
-
+        
       
 
       
@@ -412,13 +299,7 @@
       
         <p><strong>一、url组成部分</strong></p>
 <p>例：<a target="_blank" rel="noopener" href="http://www.example.com/index.html#print?id=77&amp;nameid=2905210001&amp;page=1">http://www.example.com/index.html#print?id=77&amp;nameid=2905210001&amp;page=1</a><br>1.协议：http<br>2.域名：<a target="_blank" rel="noopener" href="http://www.example.com/">www.example.com</a><br>3.端口号：本机一般为 :8080<br>4.path： index.html#print</p>
-<p>#: 代表网页中的一个位置。其右面的字符，就是该位置的标识符，用来指导浏览器动作的，对服务器端完全无用。<br>单单改变#后的部分，浏览器只会滚动到相应位置，不会重新加载网页。<br><code>window.location.hash</code>读取#值<br>?: 两个作用<br>1.传递参数，？后就是path所有的参数字段<br>2.清除缓存，比如<a target="_blank" rel="noopener" href="http://www.xxxxx.com/index.html">http://www.xxxxx.com/index.html</a> 和 <a target="_blank" rel="noopener" href="http://www.xxxxx.com/index.html?test123123">http://www.xxxxx.com/index.html?test123123</a> 两者效果一样但是后者一个有？ 浏览器访问时会把其当作一个新地址访问，不从缓存访问。<br>&amp;: 不同参数之间的间隔符</p>
-<p><strong>二、如何获取url参数</strong></p>
-<p><code>function parse_url(_url)&#123; //定义函数</code><br><code>　　var pattern = /(\w+)=(\w+)/ig;//定义正则表达式</code><br><code>　　var parames = &#123;&#125;;//定义数组</code><br><code>　　url.replace(pattern, function(a, b, c)&#123;</code><br><code>　　　　parames[b] = c;</code><br><code>　　&#125;);</code><br><code>　　return parames;//返回这个数组.</code><br><code>&#125;</code></p>
-<p><code>var url = &quot;[http://www.baidu.com?name=elephant&amp;age=25&amp;sex=male](http://www.baidu.com/?name=elephant&amp;age=25&amp;sex=male)&quot;</code><br><code>var params = parse_url(url);// [&quot;name=elephant&quot;, &quot;age=25&quot;, &quot;sex=male&quot;]</code></p>
-<img src="/myblog.github.io/2021/08/05/%E8%8E%B7%E5%8F%96url%E5%8F%82%E6%95%B0/scshot1.png" class title="scshot1">
-
-
+        
       
 
       
@@ -489,26 +370,7 @@
 <p><code>hexo g</code></p>
 <p><code>hexo s</code></p>
 <p>打开本地浏览器即可查看</p>
-<h4 id="二、发布到github-pages"><a href="#二、发布到github-pages" class="headerlink" title="二、发布到github pages"></a>二、发布到github pages</h4><p>1.绑定github：</p>
-<p><code>git config --global user.name &quot;&quot;</code></p>
-<p><code>git config --global user.email &quot;&quot;</code></p>
-<p>2.添加密钥：</p>
-<p><code>eval &quot;$(ssh-agent -s)&quot;</code>  添加密钥到ssh-agent</p>
-<p><code>ssh-add ~/.ssh/id_rsa</code>    添加生成的SSH key到ssh-agent</p>
-<p>3.在github上配置ssh：</p>
-<img src="/myblog.github.io/2021/08/05/FirstBlog/scshot1.png" class title="scshot1">
-
-<p>新建一个new ssh key，将id_rsa.pub文件里的内容复制上去</p>
-<p><code>ssh -T git@github.com</code> 测试是否添加成功</p>
-<p>4.配置_config.yml：</p>
-<p>修改repo值： type,repository(值为github上ssh的路径),branch</p>
-<p>修改url（github pages分配的url），root（项目名）（！！！项目名后缀最好为.github.io）</p>
-<p>(不设置url和root，本地可以运行，线上运行无法加载css和js)</p>
-<p>5.部署前安装扩展：</p>
-<p><code>npm install hexo-deployer-git --save</code></p>
-<p>6.部署发布：</p>
-<p><code>hexo d -g</code></p>
-
+        
       
 
       

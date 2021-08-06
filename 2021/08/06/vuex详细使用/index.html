@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://rooneyzzz.github.io/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/scshot2.png">
 <meta property="og:image" content="https://rooneyzzz.github.io/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/scshot3.png">
 <meta property="article:published_time" content="2021-08-06T04:13:06.000Z">
-<meta property="article:modified_time" content="2021-08-06T07:22:42.597Z">
+<meta property="article:modified_time" content="2021-08-06T11:28:40.325Z">
 <meta property="article:author" content="ZRJ">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://rooneyzzz.github.io/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/liuchengtu.png">
@@ -177,6 +177,8 @@
 <p>状态管理： 理解为把需要多个组件共享的变量全部存储在一个对象里。 将该对象放入顶层vue实例中，让其他组件可以使用。（因此多个组件可以共享该对象的所有变量属性）</p>
 <p>优点： 如果自己封装这个对象，不能做到响应式，而vuejs最大的优势就是响应式，vuex可以达到这个效果</p>
 <p>vuex使用场景： 需要共享的状态信息：如用户登陆状态，购物车收藏等</p>
+<span id="more"></span>
+
 <p><strong>一、安装</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install vuex --save</span><br><span class="line">一般在src下创建一个store来存放vuex相关代码（不在main.js中直接调用，不然main会越来越大）</span><br></pre></td></tr></table></figure>
 

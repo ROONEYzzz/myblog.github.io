@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="https://rooneyzzz.github.io/myblog.github.io">
   <title>获取url参数 | RooneyBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、url组成部分 例：http:&#x2F;&#x2F;www.example.com&#x2F;index.html#print?id&#x3D;77&amp;nameid&#x3D;2905210001&amp;page&#x3D;11.协议：http2.域名：www.example.com3.端口号：本机一般为 :80804.path： index.html#print #: 代表网页中的一个位置。其右面的字符，就是该位置的标识符，用来指导浏览器动">
+  <meta name="description" content="一、url组成部分 例：http:&#x2F;&#x2F;www.example.com&#x2F;index.html#print?id&#x3D;77&amp;nameid&#x3D;2905210001&amp;page&#x3D;11.协议：http2.域名：www.example.com3.端口号：本机一般为 :80804.path： index.html#print">
 <meta property="og:type" content="article">
 <meta property="og:title" content="获取url参数">
 <meta property="og:url" content="https://rooneyzzz.github.io/myblog.github.io/2021/08/05/%E8%8E%B7%E5%8F%96url%E5%8F%82%E6%95%B0/index.html">
 <meta property="og:site_name" content="RooneyBlog">
-<meta property="og:description" content="一、url组成部分 例：http:&#x2F;&#x2F;www.example.com&#x2F;index.html#print?id&#x3D;77&amp;nameid&#x3D;2905210001&amp;page&#x3D;11.协议：http2.域名：www.example.com3.端口号：本机一般为 :80804.path： index.html#print #: 代表网页中的一个位置。其右面的字符，就是该位置的标识符，用来指导浏览器动">
+<meta property="og:description" content="一、url组成部分 例：http:&#x2F;&#x2F;www.example.com&#x2F;index.html#print?id&#x3D;77&amp;nameid&#x3D;2905210001&amp;page&#x3D;11.协议：http2.域名：www.example.com3.端口号：本机一般为 :80804.path： index.html#print">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://rooneyzzz.github.io/myblog.github.io/2021/08/05/%E8%8E%B7%E5%8F%96url%E5%8F%82%E6%95%B0/scshot1.png">
 <meta property="article:published_time" content="2021-08-05T08:07:44.000Z">
-<meta property="article:modified_time" content="2021-08-05T08:20:32.856Z">
+<meta property="article:modified_time" content="2021-08-06T11:28:49.697Z">
 <meta property="article:author" content="ZRJ">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://rooneyzzz.github.io/myblog.github.io/2021/08/05/%E8%8E%B7%E5%8F%96url%E5%8F%82%E6%95%B0/scshot1.png">
@@ -172,6 +172,7 @@
       
         <p><strong>一、url组成部分</strong></p>
 <p>例：<a target="_blank" rel="noopener" href="http://www.example.com/index.html#print?id=77&amp;nameid=2905210001&amp;page=1">http://www.example.com/index.html#print?id=77&amp;nameid=2905210001&amp;page=1</a><br>1.协议：http<br>2.域名：<a target="_blank" rel="noopener" href="http://www.example.com/">www.example.com</a><br>3.端口号：本机一般为 :8080<br>4.path： index.html#print</p>
+<span id="more"></span>
 <p>#: 代表网页中的一个位置。其右面的字符，就是该位置的标识符，用来指导浏览器动作的，对服务器端完全无用。<br>单单改变#后的部分，浏览器只会滚动到相应位置，不会重新加载网页。<br><code>window.location.hash</code>读取#值<br>?: 两个作用<br>1.传递参数，？后就是path所有的参数字段<br>2.清除缓存，比如<a target="_blank" rel="noopener" href="http://www.xxxxx.com/index.html">http://www.xxxxx.com/index.html</a> 和 <a target="_blank" rel="noopener" href="http://www.xxxxx.com/index.html?test123123">http://www.xxxxx.com/index.html?test123123</a> 两者效果一样但是后者一个有？ 浏览器访问时会把其当作一个新地址访问，不从缓存访问。<br>&amp;: 不同参数之间的间隔符</p>
 <p><strong>二、如何获取url参数</strong></p>
 <p><code>function parse_url(_url)&#123; //定义函数</code><br><code>　　var pattern = /(\w+)=(\w+)/ig;//定义正则表达式</code><br><code>　　var parames = &#123;&#125;;//定义数组</code><br><code>　　url.replace(pattern, function(a, b, c)&#123;</code><br><code>　　　　parames[b] = c;</code><br><code>　　&#125;);</code><br><code>　　return parames;//返回这个数组.</code><br><code>&#125;</code></p>
