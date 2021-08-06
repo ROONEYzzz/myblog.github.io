@@ -929,7 +929,8 @@ html {
 }
 
 .left-col {
-  background: #fff;
+  /* background: #fff; */
+  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
   width: 300px;
   position: fixed;
   opacity: 1;
