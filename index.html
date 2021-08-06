@@ -146,6 +146,179 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-vuex详细使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/">vuex详细使用</a>
+    </h1>
+  
+
+        
+        <a href="/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+  	<time datetime="2021-08-06T04:13:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Vuex ：用于状态管理，采用集中式存储管理应用的所有组件状态</p>
+<p>状态管理： 理解为把需要多个组件共享的变量全部存储在一个对象里。 将该对象放入顶层vue实例中，让其他组件可以使用。（因此多个组件可以共享该对象的所有变量属性）</p>
+<p>优点： 如果自己封装这个对象，不能做到响应式，而vuejs最大的优势就是响应式，vuex可以达到这个效果</p>
+<p>vuex使用场景： 需要共享的状态信息：如用户登陆状态，购物车收藏等</p>
+<p><strong>一、安装</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install vuex --save</span><br><span class="line">一般在src下创建一个store来存放vuex相关代码（不在main.js中直接调用，不然main会越来越大）</span><br></pre></td></tr></table></figure>
+
+<p>store文件夹下index.js：</p>
+<p>import Vue from ‘vue’<br>import Vuex from ‘vuex’</p>
+<p>//1.安装插件<br>Vue.use(Vuex)<br>//2.创建对象<br>const store = new Vuex.Store({<br>state: {<br>//需要共享的状态变量<br>},</p>
+<p>mutations: {<br>//同步操作，并有Devtools来记录状态的改变<br>},</p>
+<p>actions: {<br>//有异步操作时提交到actions中来做（如发送网络请求等）<br>},<br>getters: {</p>
+<p>//可以理解为computed，可以缓存的计算属性</p>
+<p>},<br>modules: {</p>
+<p>},<br>})<br>//3.导出<br>export default store</p>
+<p>main.js中调用vuex</p>
+<p>import store from ‘./store’</p>
+<p>Vue.prototype.$store = store</p>
+<p><strong>二、使用流程图</strong></p>
+<img src="/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/liuchengtu.png" class title="liuchengtu">
+
+<p>以上是官方建议的使用流程，实际中可以直接用$store.state.xxx来修改状态（调用状态可以直接使用），但是不推荐（原因：当多个组件使用$store.state.来修改同一个状态时，无法跟踪是哪一个组件进行的修改）</p>
+<p>为了解决上述问题，使用Devtools</p>
+<p>Devtools：vuex官方的浏览器插件，可以每次记录state的改变（因此修改状态建议通过mutations修改）（在chome商店中下载添加）</p>
+<p>state单一状态树：所有的状态变量都写入一个store，便于管理，全部使用$store调用即可</p>
+<p><strong>mutations使用步骤（同步方法）：</strong></p>
+<p>1.在store里的mutations中写入方法，state中写入需要共享的状态变量</p>
+<p>2.在需要用到该状态的组件methods中 调用this.$store.commit来获取mutations中定义的方法</p>
+<p><strong>actions使用步骤（异步方法）：</strong></p>
+<p>1.在store里的actions中写入异步方法</p>
+<p>2.在需要用到该状态的组件methods中 调用this.$store.dispatch来获取actions中定义的方法</p>
+<p><strong>modules使用方法：</strong></p>
+<p>当所有状态全写入state，state过于臃肿，modules用于抽离，modules中定义的对象，内置可以设置state，mutations，getters，actions。不建议再嵌套modules，不然vuex反而使用麻烦。</p>
+<p><strong>项目结构</strong></p>
+<p>建议把state，mutations，getters，actions单独写成js文件放在store下，单独创建一个modules文件夹存储modules。这样就不用全写在index里了。</p>
+<p><strong>三、实践（mutation&amp;state）</strong></p>
+<p>在mutations中添加方法：</p>
+<p>mutations: {<br>//同步操作，并有Devtools来记录状态的改变<br>//自动传入参数state<br>increment(state ) {<br>state.counter++<br>},<br>decrement(state) {<br>state.counter–<br>}<br>},</p>
+<p>组件中显示counter：</p>
+<p><code>&lt;h2&gt;&#123;&#123;$store.state.counter&#125;&#125;&lt;/h2&gt;</code></p>
+<p>app.vue中显示counter：</p>
+<p><code>&lt;h2&gt;&#123;&#123;$store.state.counter&#125;&#125;&lt;/h2&gt;</code></p>
+<p>&lt;button @click=”plus”&gt;+</p>
+<p>&lt;button @click=”minus”&gt;-</p>
+<p><hellovuex></hellovuex></p>
+<p>methods: {</p>
+<p>plus() {<br>this.$store.commit(‘increment’)<br>},<br>minus() {<br>this.$store.commit(‘decrement’)<br>}<br>}</p>
+<p>实现效果：</p>
+<img src="/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/scshot1.png" class title="scshot1">
+
+<ul>
+<li><ul>
+<li>app.vue和hellovuex组件的counter显示是同步响应式的</li>
+</ul>
+</li>
+</ul>
+<p>如果直接调用$store.state.counter++ 则在devtools下可以发现，状态并不会被记录改变</p>
+<p>但是把方法写入mutations 可以关测到事件：</p>
+<img src="/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/scshot2.png" class title="scshot2">
+
+
+
+<p><strong>四、实践（getters）</strong></p>
+<p>在getters中添加方法：</p>
+<p>getters: {<br>//可以理解为computed，可以缓存的计算属性<br>powerCounter(state) {<br>return state.counter*state.counter<br>}，</p>
+<p>triple(state,getters){<br>//第二个参数用于方便调用getters中其他的方法<br>return getters.powerCounter * state.counter<br>}</p>
+<p>},</p>
+<p>组件中直接调用：</p>
+<p><code>&lt;h2&gt;&#123;&#123;$store.getters.powerCounter&#125;&#125;&lt;/h2&gt;</code></p>
+<p>结果：</p>
+<img src="/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/scshot3.png" class title="scshot3">
+
+<p><strong>五、实践（mutations细节）</strong></p>
+<p>1.可以传入动态参数：</p>
+<p>store中添加：</p>
+<p>plusCount(state,count) {<br>state.counter += count<br>},</p>
+<p>app.vue中添加methods：</p>
+<p>addCount(count) {</p>
+<p>//mutations传入的第二个参数称之为playload载荷</p>
+<p>this.$store.commit(‘plusCount’,count)<br>},</p>
+<p>app.vue中添加显示按钮：</p>
+<p>&lt;button @click=”addCount(5)”&gt;+5</p>
+
+
+<p>2.mutations变量常量</p>
+<p>因为使用mutations建立函数在其他组件中commit使用时还需要复制粘贴，较为麻烦，因此在store中单独建立一个js文件，存放常量：</p>
+<p>mutations-type.js：</p>
+<p>export const PLUS = ‘increment’</p>
+<p>index.js：</p>
+<p>import { PLUS } from ‘./mutations-type’;</p>
+<p><a href="state">PLUS</a> { //使用mutations变量常量避免拼写出错<br>state.counter++<br>},</p>
+<p>app.vue：</p>
+<p>import {PLUS} from ‘./store/mutations-type’</p>
+<p>plus() {<br>this.$store.commit(PLUS)<br>}</p>
+<p>这样就统一使用PLUS 而不用重复写increment了，由于有import，因此可以自动补全。</p>
+<p><strong>六、实践（actions）</strong></p>
+<p>使用actions原因：在mutations中如果做异步操作，devtools无法追踪数据的变更。</p>
+<p>index.js：</p>
+<p>//默认参数为context，不是state了<br>UpdateInfo(context) {<br>setTimeout(() =&gt; {<br>context.commit(‘decrement’)<br>},1000)<br>}</p>
+<p>App.vue：</p>
+<p>updateInfo() {<br>this.$store.dispatch(‘UpdateInfo’)<br>}</p>
+<p>实现隔一秒counter减1，devtools中也可以跟踪到。</p>
+<p><strong>七、实践（modules）</strong></p>
+<p>index.js：</p>
+<p>modules: {//用于抽离<br>a: {<br>state: {<br>name: ‘zrj’,<br>},<br>mutations: {<br>updatename(state,newname) {<br><a target="_blank" rel="noopener" href="http://state.name/">state.name</a> = newname<br>}<br>},<br>getters: {},<br>actions: {},<br>}<br>},</p>
+<p>app.vue：</p>
+<p><code>&lt;h2&gt;&#123;&#123;$[store.state.a.name](http://store.state.a.name/)&#125;&#125;&lt;/h2&gt;</code></p>
+<p>&lt;button @click=”updatename”&gt;修改名字</p>
+<p>updatename() {<br>this.$store.commit(‘updatename’,’zhangruijie’)<br>}</p>
+<p>可见如果要调用modules中的state，在组件中需要加个.modules名称</p>
+<p>modules中的其他字段如mutations等，使用和外层是一样的，区别就是，modules中的mutations等只能调模块内的state。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Vue响应式原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
