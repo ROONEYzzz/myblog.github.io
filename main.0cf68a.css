@@ -929,13 +929,17 @@ html {
 }
 
 .left-col {
-  background: #fff;
+  /* background: #fff; */
+  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('image-url') no-repeat 0% 20%/ cover;
   width: 300px;
   position: fixed;
   opacity: 1;
   transition: all .2s ease-in;
   height: 100%;
-  z-index: 999
+  z-index: 999;
+  overflow: hidden;
+  overflow-y: auto;
+  margin-bottom: 15px
 }
 
 .left-col .overlay {
@@ -3146,17 +3150,7 @@ pre .id {
   }
 
   .left-col {
-    /* display: none */
-    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('image-url') no-repeat 0% 20%/ cover;
-    width: 300px;
-    position: fixed;
-    opacity: 1;
-    transition: all .2s ease-in;
-    height: 100%;
-    z-index: 999;
-    overflow: hidden;
-    overflow-y: auto;
-    margin-bottom: 15px
+    display: none
   }
 
   .mid-col {
