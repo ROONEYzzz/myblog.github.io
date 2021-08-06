@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://rooneyzzz.github.io/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/scshot2.png">
 <meta property="og:image" content="https://rooneyzzz.github.io/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/scshot3.png">
 <meta property="article:published_time" content="2021-08-06T04:13:06.000Z">
-<meta property="article:modified_time" content="2021-08-06T04:18:53.707Z">
+<meta property="article:modified_time" content="2021-08-06T07:22:42.597Z">
 <meta property="article:author" content="ZRJ">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://rooneyzzz.github.io/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/liuchengtu.png">
@@ -181,16 +181,11 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install vuex --save</span><br><span class="line">一般在src下创建一个store来存放vuex相关代码（不在main.js中直接调用，不然main会越来越大）</span><br></pre></td></tr></table></figure>
 
 <p>store文件夹下index.js：</p>
-<p>import Vue from ‘vue’<br>import Vuex from ‘vuex’</p>
-<p>//1.安装插件<br>Vue.use(Vuex)<br>//2.创建对象<br>const store = new Vuex.Store({<br>state: {<br>//需要共享的状态变量<br>},</p>
-<p>mutations: {<br>//同步操作，并有Devtools来记录状态的改变<br>},</p>
-<p>actions: {<br>//有异步操作时提交到actions中来做（如发送网络请求等）<br>},<br>getters: {</p>
-<p>//可以理解为computed，可以缓存的计算属性</p>
-<p>},<br>modules: {</p>
-<p>},<br>})<br>//3.导出<br>export default store</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">import Vue from <span class="string">&#x27;vue&#x27;</span></span><br><span class="line">import Vuex from <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line"></span><br><span class="line">//1.安装插件</span><br><span class="line">Vue.use(Vuex)</span><br><span class="line">//2.创建对象</span><br><span class="line">const store = new Vuex.Store(&#123;</span><br><span class="line">state: &#123;</span><br><span class="line">//需要共享的状态变量</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">mutations: &#123;</span><br><span class="line">//同步操作，并有Devtools来记录状态的改变</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">actions: &#123;</span><br><span class="line">//有异步操作时提交到actions中来做（如发送网络请求等）</span><br><span class="line">&#125;,</span><br><span class="line">getters: &#123;</span><br><span class="line"></span><br><span class="line">//可以理解为computed，可以缓存的计算属性</span><br><span class="line"></span><br><span class="line">&#125;,</span><br><span class="line">modules: &#123;</span><br><span class="line"></span><br><span class="line">&#125;,</span><br><span class="line">&#125;)</span><br><span class="line">//3.导出</span><br><span class="line"><span class="built_in">export</span> default store</span><br></pre></td></tr></table></figure>
+
+
 <p>main.js中调用vuex</p>
-<p>import store from ‘./store’</p>
-<p>Vue.prototype.$store = store</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import store from <span class="string">&#x27;./store&#x27;</span></span><br><span class="line"></span><br><span class="line">Vue.prototype.<span class="variable">$store</span> = store</span><br></pre></td></tr></table></figure>
 <p><strong>二、使用流程图</strong></p>
 <img src="/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/liuchengtu.png" class title="liuchengtu">
 
@@ -210,16 +205,11 @@
 <p>建议把state，mutations，getters，actions单独写成js文件放在store下，单独创建一个modules文件夹存储modules。这样就不用全写在index里了。</p>
 <p><strong>三、实践（mutation&amp;state）</strong></p>
 <p>在mutations中添加方法：</p>
-<p>mutations: {<br>//同步操作，并有Devtools来记录状态的改变<br>//自动传入参数state<br>increment(state ) {<br>state.counter++<br>},<br>decrement(state) {<br>state.counter–<br>}<br>},</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mutations: &#123;</span><br><span class="line">//同步操作，并有Devtools来记录状态的改变</span><br><span class="line">//自动传入参数state</span><br><span class="line">increment(state ) &#123;</span><br><span class="line">state.counter++</span><br><span class="line">&#125;,</span><br><span class="line">decrement(state) &#123;</span><br><span class="line">state.counter--</span><br><span class="line">&#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 <p>组件中显示counter：</p>
 <p><code>&lt;h2&gt;&#123;&#123;$store.state.counter&#125;&#125;&lt;/h2&gt;</code></p>
 <p>app.vue中显示counter：</p>
-<p><code>&lt;h2&gt;&#123;&#123;$store.state.counter&#125;&#125;&lt;/h2&gt;</code></p>
-<p>&lt;button @click=”plus”&gt;+</p>
-<p>&lt;button @click=”minus”&gt;-</p>
-<p><hellovuex></hellovuex></p>
-<p>methods: {</p>
-<p>plus() {<br>this.$store.commit(‘increment’)<br>},<br>minus() {<br>this.$store.commit(‘decrement’)<br>}<br>}</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;h2&gt;&#123;&#123;<span class="variable">$store</span>.state.counter&#125;&#125;&lt;/h2&gt;</span><br><span class="line"></span><br><span class="line">&lt;button @click=<span class="string">&quot;plus&quot;</span>&gt;+&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">&lt;button @click=<span class="string">&quot;minus&quot;</span>&gt;-&lt;/button&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;hellovuex&gt;&lt;/hellovuex&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">methods: &#123;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">plus</span></span>() &#123;</span><br><span class="line">this.<span class="variable">$store</span>.commit(<span class="string">&#x27;increment&#x27;</span>)</span><br><span class="line">&#125;,</span><br><span class="line"><span class="function"><span class="title">minus</span></span>() &#123;</span><br><span class="line">this.<span class="variable">$store</span>.commit(<span class="string">&#x27;decrement&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>实现效果：</p>
 <img src="/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/scshot1.png" class title="scshot1">
 
@@ -237,9 +227,7 @@
 
 <p><strong>四、实践（getters）</strong></p>
 <p>在getters中添加方法：</p>
-<p>getters: {<br>//可以理解为computed，可以缓存的计算属性<br>powerCounter(state) {<br>return state.counter*state.counter<br>}，</p>
-<p>triple(state,getters){<br>//第二个参数用于方便调用getters中其他的方法<br>return getters.powerCounter * state.counter<br>}</p>
-<p>},</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">getters: &#123;</span><br><span class="line">//可以理解为computed，可以缓存的计算属性</span><br><span class="line">powerCounter(state) &#123;</span><br><span class="line"><span class="built_in">return</span> state.counter*state.counter</span><br><span class="line">&#125;，</span><br><span class="line"></span><br><span class="line">triple(state,getters)&#123;</span><br><span class="line">//第二个参数用于方便调用getters中其他的方法</span><br><span class="line"><span class="built_in">return</span> getters.powerCounter * state.counter</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 <p>组件中直接调用：</p>
 <p><code>&lt;h2&gt;&#123;&#123;$store.getters.powerCounter&#125;&#125;&lt;/h2&gt;</code></p>
 <p>结果：</p>
@@ -248,40 +236,23 @@
 <p><strong>五、实践（mutations细节）</strong></p>
 <p>1.可以传入动态参数：</p>
 <p>store中添加：</p>
-<p>plusCount(state,count) {<br>state.counter += count<br>},</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plusCount(state,count) &#123;</span><br><span class="line">state.counter += count</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 <p>app.vue中添加methods：</p>
-<p>addCount(count) {</p>
-<p>//mutations传入的第二个参数称之为playload载荷</p>
-<p>this.$store.commit(‘plusCount’,count)<br>},</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">addCount(count) &#123;</span><br><span class="line"></span><br><span class="line">//mutations传入的第二个参数称之为playload载荷</span><br><span class="line"></span><br><span class="line">this.<span class="variable">$store</span>.commit(<span class="string">&#x27;plusCount&#x27;</span>,count)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 <p>app.vue中添加显示按钮：</p>
-<p>&lt;button @click=”addCount(5)”&gt;+5</p>
+<p><code>&lt;button @click=&quot;addCount(5)&quot;&gt;+5&lt;/button&gt;</code></p>
 
 
 <p>2.mutations变量常量</p>
 <p>因为使用mutations建立函数在其他组件中commit使用时还需要复制粘贴，较为麻烦，因此在store中单独建立一个js文件，存放常量：</p>
-<p>mutations-type.js：</p>
-<p>export const PLUS = ‘increment’</p>
-<p>index.js：</p>
-<p>import { PLUS } from ‘./mutations-type’;</p>
-<p><a href="state">PLUS</a> { //使用mutations变量常量避免拼写出错<br>state.counter++<br>},</p>
-<p>app.vue：</p>
-<p>import {PLUS} from ‘./store/mutations-type’</p>
-<p>plus() {<br>this.$store.commit(PLUS)<br>}</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">mutations-type.js：</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> const PLUS = <span class="string">&#x27;increment&#x27;</span></span><br><span class="line"></span><br><span class="line">index.js：</span><br><span class="line"></span><br><span class="line">import &#123; PLUS &#125; from <span class="string">&#x27;./mutations-type&#x27;</span>;</span><br><span class="line"></span><br><span class="line">[PLUS](state) &#123; //使用mutations变量常量避免拼写出错</span><br><span class="line">state.counter++</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">app.vue：</span><br><span class="line"></span><br><span class="line">import &#123;PLUS&#125; from <span class="string">&#x27;./store/mutations-type&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">plus</span></span>() &#123;</span><br><span class="line">this.<span class="variable">$store</span>.commit(PLUS)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这样就统一使用PLUS 而不用重复写increment了，由于有import，因此可以自动补全。</p>
 <p><strong>六、实践（actions）</strong></p>
 <p>使用actions原因：在mutations中如果做异步操作，devtools无法追踪数据的变更。</p>
-<p>index.js：</p>
-<p>//默认参数为context，不是state了<br>UpdateInfo(context) {<br>setTimeout(() =&gt; {<br>context.commit(‘decrement’)<br>},1000)<br>}</p>
-<p>App.vue：</p>
-<p>updateInfo() {<br>this.$store.dispatch(‘UpdateInfo’)<br>}</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">index.js：</span><br><span class="line"></span><br><span class="line">//默认参数为context，不是state了</span><br><span class="line">UpdateInfo(context) &#123;</span><br><span class="line">setTimeout(() =&gt; &#123;</span><br><span class="line">context.commit(<span class="string">&#x27;decrement&#x27;</span>)</span><br><span class="line">&#125;,1000)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">App.vue：</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">updateInfo</span></span>() &#123;</span><br><span class="line">this.<span class="variable">$store</span>.dispatch(<span class="string">&#x27;UpdateInfo&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>实现隔一秒counter减1，devtools中也可以跟踪到。</p>
 <p><strong>七、实践（modules）</strong></p>
-<p>index.js：</p>
-<p>modules: {//用于抽离<br>a: {<br>state: {<br>name: ‘zrj’,<br>},<br>mutations: {<br>updatename(state,newname) {<br><a target="_blank" rel="noopener" href="http://state.name/">state.name</a> = newname<br>}<br>},<br>getters: {},<br>actions: {},<br>}<br>},</p>
-<p>app.vue：</p>
-<p><code>&lt;h2&gt;&#123;&#123;$[store.state.a.name](http://store.state.a.name/)&#125;&#125;&lt;/h2&gt;</code></p>
-<p>&lt;button @click=”updatename”&gt;修改名字</p>
-<p>updatename() {<br>this.$store.commit(‘updatename’,’zhangruijie’)<br>}</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">index.js：</span><br><span class="line"></span><br><span class="line">modules: &#123;//用于抽离</span><br><span class="line">a: &#123;</span><br><span class="line">state: &#123;</span><br><span class="line">name: <span class="string">&#x27;zrj&#x27;</span>,</span><br><span class="line">&#125;,</span><br><span class="line">mutations: &#123;</span><br><span class="line">updatename(state,newname) &#123;</span><br><span class="line">[state.name](http://state.name/) = newname</span><br><span class="line">&#125;</span><br><span class="line">&#125;,</span><br><span class="line">getters: &#123;&#125;,</span><br><span class="line">actions: &#123;&#125;,</span><br><span class="line">&#125;</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">app.vue：</span><br><span class="line"></span><br><span class="line">`&lt;h2&gt;&#123;&#123;$[store.state.a.name](http://store.state.a.name/)&#125;&#125;&lt;/h2&gt;`</span><br><span class="line"></span><br><span class="line">&lt;button @click=<span class="string">&quot;updatename&quot;</span>&gt;修改名字&lt;/button&gt;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">updatename</span></span>() &#123;</span><br><span class="line">this.<span class="variable">$store</span>.commit(<span class="string">&#x27;updatename&#x27;</span>,<span class="string">&#x27;zhangruijie&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>可见如果要调用modules中的state，在组件中需要加个.modules名称</p>
 <p>modules中的其他字段如mutations等，使用和外层是一样的，区别就是，modules中的mutations等只能调模块内的state。</p>
 
