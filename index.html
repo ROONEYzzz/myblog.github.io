@@ -62,7 +62,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 1
+			总文章数 5
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -195,6 +195,312 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/myblog.github.io/2021/08/07/webpack%E5%AD%A6%E4%B9%A0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-vuex详细使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/">vuex详细使用</a>
+    </h1>
+  
+
+        
+        <a href="/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+  	<time datetime="2021-08-06T04:13:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+          		<p>Vuex ：用于状态管理，采用集中式存储管理应用的所有组件状态</p>
+<p>状态管理： 理解为把需要多个组件共享的变量全部存储在一个对象里。 将该对象放入顶层vue实例中，让其他组件可以使用。（因此多个组件可以共享该对象的所有变量属性）</p>
+<p>优点： 如果自己封装这个对象，不能做到响应式，而vuejs最大的优势就是响应式，vuex可以达到这个效果</p>
+<p>vuex使用场景： 需要共享的状态信息：如用户登陆状态，购物车收藏等</p>
+          
+        
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/myblog.github.io/categories/Vue相关//" class="article-tag-list-link color1">Vue相关</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Vue响应式原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/myblog.github.io/2021/08/05/Vue%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/">Vue响应式原理</a>
+    </h1>
+  
+
+        
+        <a href="/myblog.github.io/2021/08/05/Vue%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/" class="archive-article-date">
+  	<time datetime="2021-08-05T15:09:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+          		<h2 id="一、概要"><a href="#一、概要" class="headerlink" title="一、概要"></a>一、概要</h2><p>响应式原理的表现形式： 数据更新时视图也跟着更新。</p>
+<p>优点： 避免了繁琐的DOM操作，只需要进行数据的管理。</p>
+<p>Vue响应式实现原理：通过1.Object.defineProperty方法中的getter，setter 2.观察者模式 来实现。</p>
+          
+        
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/myblog.github.io/categories/Vue相关//" class="article-tag-list-link color1">Vue相关</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/myblog.github.io/2021/08/05/Vue%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-获取url参数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/myblog.github.io/2021/08/05/%E8%8E%B7%E5%8F%96url%E5%8F%82%E6%95%B0/">获取url参数</a>
+    </h1>
+  
+
+        
+        <a href="/myblog.github.io/2021/08/05/%E8%8E%B7%E5%8F%96url%E5%8F%82%E6%95%B0/" class="archive-article-date">
+  	<time datetime="2021-08-05T08:07:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+          		<p><strong>一、url组成部分</strong></p>
+<p>例：<a target="_blank" rel="noopener" href="http://www.example.com/index.html#print?id=77&amp;nameid=2905210001&amp;page=1">http://www.example.com/index.html#print?id=77&amp;nameid=2905210001&amp;page=1</a><br>1.协议：http<br>2.域名：<a target="_blank" rel="noopener" href="http://www.example.com/">www.example.com</a><br>3.端口号：本机一般为 :8080<br>4.path： index.html#print</p>
+          
+        
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/myblog.github.io/categories/http相关//" class="article-tag-list-link color2">http相关</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/myblog.github.io/2021/08/05/%E8%8E%B7%E5%8F%96url%E5%8F%82%E6%95%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-FirstBlog" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/myblog.github.io/2021/08/05/FirstBlog/">First-Blog</a>
+    </h1>
+  
+
+        
+        <a href="/myblog.github.io/2021/08/05/FirstBlog/" class="archive-article-date">
+  	<time datetime="2021-08-05T02:25:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+          		<meta name="referrer" content="no-referrer">
+### hexo搭建步骤&避坑
+
+<h4 id="一、构建本地hexo"><a href="#一、构建本地hexo" class="headerlink" title="一、构建本地hexo"></a>一、构建本地hexo</h4><p><code>npm install hexo -g</code></p>
+<p><code>hexo init</code></p>
+<p><code>npm install</code></p>
+<p><code>hexo g</code></p>
+<p><code>hexo s</code></p>
+<p>打开本地浏览器即可查看</p>
+          
+        
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/myblog.github.io/categories/hexo相关//" class="article-tag-list-link color2">hexo相关</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/myblog.github.io/2021/08/05/FirstBlog/">展开全文 >></a>
         </p>
       
 
