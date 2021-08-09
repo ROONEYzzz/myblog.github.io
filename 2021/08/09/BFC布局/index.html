@@ -8,16 +8,21 @@
   <link rel="dns-prefetch" href="https://rooneyzzz.github.io/myblog.github.io">
   <title>BFC布局 | RooneyBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="可以把BFC理解为一个独立的布局环境，BFC内部的元素布局与外部互不影响。 可以通过一些条件触发BFC，从而实现布局上的需求。 BFC的触发条件：  根元素（） float值非none overflow值非visible display值为inline-block、table-cell、table-caption、flex、inline-flex position值为absolute、fixed">
+  <meta name="description" content="可以把BFC理解为一个独立的布局环境，BFC内部的元素布局与外部互不影响。 可以通过一些条件触发BFC，从而实现布局上的需求。 BFC的触发条件：  根元素（）  float值非none  overflow值非visible  display值为inline-block、table-cell、table-caption、flex、inline-flex  position值为absolute、fi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BFC布局">
 <meta property="og:url" content="https://rooneyzzz.github.io/myblog.github.io/2021/08/09/BFC%E5%B8%83%E5%B1%80/index.html">
 <meta property="og:site_name" content="RooneyBlog">
-<meta property="og:description" content="可以把BFC理解为一个独立的布局环境，BFC内部的元素布局与外部互不影响。 可以通过一些条件触发BFC，从而实现布局上的需求。 BFC的触发条件：  根元素（） float值非none overflow值非visible display值为inline-block、table-cell、table-caption、flex、inline-flex position值为absolute、fixed">
+<meta property="og:description" content="可以把BFC理解为一个独立的布局环境，BFC内部的元素布局与外部互不影响。 可以通过一些条件触发BFC，从而实现布局上的需求。 BFC的触发条件：  根元素（）  float值非none  overflow值非visible  display值为inline-block、table-cell、table-caption、flex、inline-flex  position值为absolute、fi">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://rooneyzzz.github.io/myblog.github.io/2021/08/09/BFC%E5%B8%83%E5%B1%80/scshot1.png">
+<meta property="og:image" content="https://rooneyzzz.github.io/myblog.github.io/2021/08/09/BFC%E5%B8%83%E5%B1%80/scshot2.png">
+<meta property="og:image" content="https://rooneyzzz.github.io/myblog.github.io/2021/08/09/BFC%E5%B8%83%E5%B1%80/scshot3.png">
+<meta property="og:image" content="https://rooneyzzz.github.io/myblog.github.io/2021/08/09/BFC%E5%B8%83%E5%B1%80/scshot4.png">
+<meta property="og:image" content="https://rooneyzzz.github.io/myblog.github.io/2021/08/09/BFC%E5%B8%83%E5%B1%80/scshot5.png">
+<meta property="og:image" content="https://rooneyzzz.github.io/myblog.github.io/2021/08/09/BFC%E5%B8%83%E5%B1%80/scshot6.png">
 <meta property="article:published_time" content="2021-08-09T08:00:48.000Z">
-<meta property="article:modified_time" content="2021-08-09T08:06:41.769Z">
+<meta property="article:modified_time" content="2021-08-09T08:12:46.684Z">
 <meta property="article:author" content="ZRJ">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://rooneyzzz.github.io/myblog.github.io/2021/08/09/BFC%E5%B8%83%E5%B1%80/scshot1.png">
@@ -185,28 +190,32 @@
 <p>可以通过一些条件触发BFC，从而实现布局上的需求。</p>
 <p>BFC的触发条件：</p>
 <ol>
-<li>根元素（<html>）</html></li>
-<li>float值非none</li>
-<li>overflow值非visible</li>
-<li>display值为inline-block、table-cell、table-caption、flex、inline-flex</li>
-<li>position值为absolute、fixed</li>
-</ol>
+<li><p>根元素（<html>）</html></p>
+</li>
+<li><p>float值非none</p>
+</li>
+<li><p>overflow值非visible</p>
+</li>
+<li><p>display值为inline-block、table-cell、table-caption、flex、inline-flex</p>
+</li>
+<li><p>position值为absolute、fixed</p>
+<span id="more"></span>
 <p>BFC的特性：</p>
-<ol>
+</li>
 <li><p>属于同一个BFC的两个相邻容器的上下margin会重叠（重点）<br>此时，两个元素都属于根元素，所以属于同一个BFC，同一个BFC中的两个相邻容器的上下margin就会重叠。<br>如下（上方容器的下边距为20px，下方容器上边距为20px，应该是40px的间隔，但由于BFC特性，间隔只有20px）：</p>
 <img src="/myblog.github.io/2021/08/09/BFC%E5%B8%83%E5%B1%80/scshot1.png" class title="schsot1">
 <p>同样地，也可以利用BFC特性去解决这个情况。<br>通过给蓝色块添加父元素<code>.box</code>并添加声明<code>overflow: hidden;</code>，使得父元素<code>.box</code>触发了BFC，此时红色块和蓝色块属于不同的BFC，红色块的BFC仍然是根元素，蓝色块的BFC是父元素<code>.box</code>。就不满足BFC特性1中的规定“属于同一个BFC”，从而解决了两者的上下margin重叠问题。</p>
-</li>
+<img src="/myblog.github.io/2021/08/09/BFC%E5%B8%83%E5%B1%80/scshot2.png" class title="scshot2"></li>
 <li><p>计算BFC高度时浮动元素也参于计算（重点）<br>浮动的元素无法撑高它的父盒子，如图：</p>
-
+<img src="/myblog.github.io/2021/08/09/BFC%E5%B8%83%E5%B1%80/scshot3.png" class title="scshot3">
 
 <p>但给父盒子添加声明<code>overflow: hidden;</code>，使得父元素触发了，而BFC特性规定“计算BFC高度时浮动元素也参于计算”，此时子元素虽然设置了浮动，但其高度仍计算至父元素内，从而解决了高度塌陷问题。<br>如图：</p>
-</li>
+<img src="/myblog.github.io/2021/08/09/BFC%E5%B8%83%E5%B1%80/scshot4.png" class title="scshot4"></li>
 <li><p>BFC的区域不会与浮动容器发生重叠（重点）<br>如图，正常情况下，左侧元素<code>.left</code>浮动时，会与右侧元素<code>.right</code>发生重叠，不能实现自适应两栏效果，这是因为左侧元素浮动，脱离了标准流。</p>
-
+<img src="/myblog.github.io/2021/08/09/BFC%E5%B8%83%E5%B1%80/scshot5.png" class title="scshot5">
 
 <p>给右侧元素<code>.right</code>添加声明<code>overflow: hidden;后</code>，左右侧元素重叠消失，实现自适应两栏效果。给右侧元素<code>.right</code>添加声明<code>overflow: hidden;</code>，使得右侧元素触发了BFC，而BFC特性规定“BFC的区域不会与浮动容器发生重叠”，从而解决了重叠问题，实现自适应两栏效果。</p>
-</li>
+<img src="/myblog.github.io/2021/08/09/BFC%E5%B8%83%E5%B1%80/scshot6.png" class title="scshot6"></li>
 <li><p>BFC内的容器在垂直方向依次排列（就是类似于正常情况下的块元素在垂直方向上依次排列）</p>
 </li>
 <li><p>元素的margin-left与其包含块的border-left相接触（基本现象）</p>
