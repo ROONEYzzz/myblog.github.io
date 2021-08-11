@@ -6,21 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://rooneyzzz.github.io/myblog.github.io">
-  <title>获取url参数 | RooneyBlog</title>
+  <title>async&amp;await | RooneyBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、url组成部分 例：http:&#x2F;&#x2F;www.example.com&#x2F;index.html#print?id&#x3D;77&amp;nameid&#x3D;2905210001&amp;page&#x3D;11.协议：http2.域名：www.example.com3.端口号：本机一般为 :80804.path： index.html#print">
+  <meta name="description" content="一、是什么 异步操作的的处理方式，比Promise更加优化，简化了then链，用await代替，逻辑更加清晰 async 用于申明一个 function 是异步的，而 await 用于等待一个异步方法执行完成。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="获取url参数">
-<meta property="og:url" content="https://rooneyzzz.github.io/myblog.github.io/2021/08/05/%E8%8E%B7%E5%8F%96url%E5%8F%82%E6%95%B0/index.html">
+<meta property="og:title" content="async&amp;await">
+<meta property="og:url" content="https://rooneyzzz.github.io/myblog.github.io/2021/08/11/async-await/index.html">
 <meta property="og:site_name" content="RooneyBlog">
-<meta property="og:description" content="一、url组成部分 例：http:&#x2F;&#x2F;www.example.com&#x2F;index.html#print?id&#x3D;77&amp;nameid&#x3D;2905210001&amp;page&#x3D;11.协议：http2.域名：www.example.com3.端口号：本机一般为 :80804.path： index.html#print">
+<meta property="og:description" content="一、是什么 异步操作的的处理方式，比Promise更加优化，简化了then链，用await代替，逻辑更加清晰 async 用于申明一个 function 是异步的，而 await 用于等待一个异步方法执行完成。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://rooneyzzz.github.io/myblog.github.io/2021/08/05/%E8%8E%B7%E5%8F%96url%E5%8F%82%E6%95%B0/scshot1.png">
-<meta property="article:published_time" content="2021-08-05T08:07:44.000Z">
-<meta property="article:modified_time" content="2021-08-07T12:55:50.353Z">
+<meta property="article:published_time" content="2021-08-11T14:05:45.000Z">
+<meta property="article:modified_time" content="2021-08-11T14:07:21.480Z">
 <meta property="article:author" content="ZRJ">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://rooneyzzz.github.io/myblog.github.io/2021/08/05/%E8%8E%B7%E5%8F%96url%E5%8F%82%E6%95%B0/scshot1.png">
   
     <link rel="alternative" href="/atom.xml" title="RooneyBlog" type="application/atom+xml">
   
@@ -159,20 +157,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-获取url参数" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-async-await" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      获取url参数
+      async&amp;await
     </h1>
   
 
         
-        <a href="/myblog.github.io/2021/08/05/%E8%8E%B7%E5%8F%96url%E5%8F%82%E6%95%B0/" class="archive-article-date">
-  	<time datetime="2021-08-05T08:07:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-05</time>
+        <a href="/myblog.github.io/2021/08/11/async-await/" class="archive-article-date">
+  	<time datetime="2021-08-11T14:05:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-11</time>
 </a>
         
       </header>
@@ -181,15 +179,29 @@
       
         
           
-            <p><strong>一、url组成部分</strong></p>
-<p>例：<a target="_blank" rel="noopener" href="http://www.example.com/index.html#print?id=77&amp;nameid=2905210001&amp;page=1">http://www.example.com/index.html#print?id=77&amp;nameid=2905210001&amp;page=1</a><br>1.协议：http<br>2.域名：<a target="_blank" rel="noopener" href="http://www.example.com/">www.example.com</a><br>3.端口号：本机一般为 :8080<br>4.path： index.html#print</p>
+            <p><strong>一、是什么</strong></p>
+<p>异步操作的的处理方式，比Promise更加优化，简化了then链，用await代替，逻辑更加清晰</p>
+<p><code>async</code> 用于申明一个 <code>function</code> 是异步的，而 <code>await</code> 用于等待一个异步方法执行完成。</p>
 <span id="more"></span>
-<p>#: 代表网页中的一个位置。其右面的字符，就是该位置的标识符，用来指导浏览器动作的，对服务器端完全无用。<br>单单改变#后的部分，浏览器只会滚动到相应位置，不会重新加载网页。<br><code>window.location.hash</code>读取#值<br>?: 两个作用<br>1.传递参数，？后就是path所有的参数字段<br>2.清除缓存，比如<a target="_blank" rel="noopener" href="http://www.xxxxx.com/index.html">http://www.xxxxx.com/index.html</a> 和 <a target="_blank" rel="noopener" href="http://www.xxxxx.com/index.html?test123123">http://www.xxxxx.com/index.html?test123123</a> 两者效果一样但是后者一个有？ 浏览器访问时会把其当作一个新地址访问，不从缓存访问。<br>&amp;: 不同参数之间的间隔符</p>
-<p><strong>二、如何获取url参数</strong></p>
-<p><code>function parse_url(_url)&#123; //定义函数</code><br><code>　　var pattern = /(\w+)=(\w+)/ig;//定义正则表达式</code><br><code>　　var parames = &#123;&#125;;//定义数组</code><br><code>　　url.replace(pattern, function(a, b, c)&#123;</code><br><code>　　　　parames[b] = c;</code><br><code>　　&#125;);</code><br><code>　　return parames;//返回这个数组.</code><br><code>&#125;</code></p>
-<p><code>var url = &quot;[http://www.baidu.com?name=elephant&amp;age=25&amp;sex=male](http://www.baidu.com/?name=elephant&amp;age=25&amp;sex=male)&quot;</code><br><code>var params = parse_url(url);// [&quot;name=elephant&quot;, &quot;age=25&quot;, &quot;sex=male&quot;]</code></p>
-<img src="/myblog.github.io/2021/08/05/%E8%8E%B7%E5%8F%96url%E5%8F%82%E6%95%B0/scshot1.png" class title="scshot1">
 
+<p><strong>二、async</strong></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">testAsync</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;hello async&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = testAsync();</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br></pre></td></tr></table></figure>
+
+<p>输出的是一个Promise对象，如果用传统Promise方法输出testAsync返回值，需要用到then：（当 <code>async</code> 函数没有返回值时，返回 <code>Promise.resolve(undefined)</code>）</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">testAsync().then(<span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v);    <span class="comment">// 输出 hello async</span></span><br><span class="line">&#125;);</span><br><span class="line">但是如果使用<span class="keyword">await</span>：</span><br><span class="line"><span class="keyword">const</span> result = <span class="keyword">await</span> testAsync();</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br></pre></td></tr></table></figure>
+
+<p>则可直接输出 hello async</p>
+<p><strong>三、await</strong></p>
+<p>﻿<strong><code>await</code>只能放在<code>async</code>函数内部使用</strong></p>
+<p><code>await</code> 用于一个异步操作之前，表示要“等待”这个异步操作的返回值。<br><code>await</code> 也可以用于一个同步的值。</p>
+<p>如果它等到的不是一个 <code>Promise</code> 对象，那 await 表达式的运算结果就是它等到的东西。<br>如果它等到的是一个 <code>Promise</code> 对象，<code>await</code> 就会阻塞后面的代码，等着 <code>Promise</code> 对象 <code>resolve</code>，然后得到 <code>resolve</code> 的值，作为 <code>await</code> 表达式的运算结果。</p>
+<p><strong>四、实例</strong></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2s 之后返回双倍的值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doubleAfter2seconds</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            resolve(<span class="number">2</span> * num)</span><br><span class="line">        &#125;, <span class="number">2000</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">testResult</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;内部调用前&#x27;</span>) <span class="comment">// 2</span></span><br><span class="line">    <span class="keyword">let</span> result = <span class="keyword">await</span> doubleAfter2seconds(<span class="number">30</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(result); <span class="comment">// 4</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;内部调用后&#x27;</span>) <span class="comment">// 5</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;外部调用前&#x27;</span>) <span class="comment">// 1</span></span><br><span class="line">testResult();</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;外部调用后&#x27;</span>) <span class="comment">// 3</span></span><br><span class="line"><span class="comment">// --- 依次输出</span></span><br><span class="line"><span class="comment">// 外部调用前</span></span><br><span class="line"><span class="comment">// 内部调用前</span></span><br><span class="line"><span class="comment">// 外部调用后</span></span><br><span class="line"><span class="comment">// --- 2s 之后输出</span></span><br><span class="line"><span class="comment">// 60</span></span><br><span class="line"><span class="comment">// 内部调用后</span></span><br></pre></td></tr></table></figure>
+
+<p>如果没用<code>await</code>关键字，此后的执行顺序应该是：<code>内部调用后</code>，<code>外部调用后</code>，<code>2s 之后输出60，</code>因为异步方法不阻塞其他代码的执行，最后再输出<code>60</code><br>这里使用了<code>await</code>关键字，所以到这里后会等待异步返回结果，再往下执行。</p>
+<p>并且当<code>testResult</code>函数内部<code>await</code>阻塞执行后，不会影响到<code>testResult</code>函数外面执行</p>
+<p><strong>五、总结</strong></p>
+<p>使用async await可以让有异步操作的代码，执行输出顺序像是同步代码一样。</p>
 
           
         
@@ -203,7 +215,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/myblog.github.io/categories/http相关//" class="article-tag-list-link color2">http相关</a>
+        			<a href="/myblog.github.io/categories/JS相关//" class="article-tag-list-link color5">JS相关</a>
         		</li>
       		
 		</ul>
@@ -258,7 +270,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://rooneyzzz.github.io/myblog.github.io/2021/08/05/%E8%8E%B7%E5%8F%96url%E5%8F%82%E6%95%B0/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://rooneyzzz.github.io/myblog.github.io/2021/08/11/async-await/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -272,18 +284,9 @@
   
 <nav id="article-nav">
   
-    <a href="/myblog.github.io/2021/08/05/Vue%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Vue响应式原理
-        
-      </div>
-    </a>
   
-  
-    <a href="/myblog.github.io/2021/08/05/FirstBlog/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">First-Blog</div>
+    <a href="/myblog.github.io/2021/08/09/BFC%E5%B8%83%E5%B1%80/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">BFC布局</div>
       <i class="icon-circle-right"></i>
     </a>
   
