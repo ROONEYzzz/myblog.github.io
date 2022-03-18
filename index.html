@@ -60,7 +60,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 9
+			总文章数 10
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -154,6 +154,100 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-迭代器与生成器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/myblog.github.io/2022/03/18/%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/">迭代器与生成器</a>
+    </h1>
+  
+
+        
+        <a href="/myblog.github.io/2022/03/18/%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/" class="archive-article-date">
+  	<time datetime="2022-03-18T14:05:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+          
+            <h1 id="一、解决问题"><a href="#一、解决问题" class="headerlink" title="一、解决问题"></a>一、解决问题</h1><h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><p>for循环等遍历方法需要使用索引，当逻辑复杂时，代码可读性降低。</p>
+<p>ES5新增了forEach，但是不够完善，无法中断遍历。</p>
+<p>ES6新增了Symbol.iterator作为key，很多内置类型实现了该Iterable接口：string、array、set、map、arguments、DOM集合类型。</p>
+<p>调用工厂函数可以生成一个迭代器：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">&#x27;123&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(str[<span class="built_in">Symbol</span>.iterator]()); <span class="comment">// StringIterator()</span></span><br></pre></td></tr></table></figure>
+
+<p>实际代买中不需要显示调用这个工厂函数，如for-of循环，数组结构等会自动调用。</p>
+<p>迭代器协议：还有内容：{done：false，value：}  无内容： {done：true，value: undefined} 当done为true后，若继续调用next（）则done仍为true，value始终为undefined。</p>
+<p>创建自定义迭代器的时候可以使用闭包，否则迭代器的每个实例只能使用一次。（需显示调用工厂函数）</p>
+<p>可选用return()中止迭代器。或使用break等中止迭代器。</p>
+<h2 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h2><p>可生成自定义迭代器（比闭包实现更简洁），可以在一个函数块内暂停和恢复代码执行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(n--)</span><br><span class="line">        <span class="keyword">yield</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>例：function * xxx</p>
+<p>生成器函数只会在初次调用next()后开始执行。</p>
+<p>使用yield中断执行 done：false</p>
+<p>使用return中断执行 done： true（即使用return后后面再next就无法读取值了）</p>
+<p>使用next恢复执行</p>
+
+          
+        
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/myblog.github.io/categories/JS红宝书//" class="article-tag-list-link color1">JS红宝书</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/myblog.github.io/2022/03/18/%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-axios详细使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -853,7 +947,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2021 ZRJ
+    		&copy; 2022 ZRJ
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
