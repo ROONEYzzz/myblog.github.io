@@ -6,19 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://rooneyzzz.github.io/myblog.github.io">
-  <title>async&amp;await | RooneyBlog</title>
+  <title>代理与反射 | RooneyBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、是什么 异步操作的的处理方式，比Promise更加优化，简化了then链，用await代替，逻辑更加清晰 async 用于申明一个 function 是异步的，而 await 用于等待一个异步方法执行完成。">
+  <meta name="description" content="代理、ES6新增  代理的作用：1.跟踪属性访问 2.隐藏属性 3.验证对象属性 4.验证函数参数 5.数据绑定与通信 1234567&#x2F;&#x2F; 创建代理const target &#x3D; &amp;#123;    id: &amp;#x27;target&amp;#x27;&amp;#125;const handler &amp;#123;&amp;#125;const proxy &#x3D; new Proxy(target,handler)  proxy只">
 <meta property="og:type" content="article">
-<meta property="og:title" content="async&amp;await">
-<meta property="og:url" content="https://rooneyzzz.github.io/myblog.github.io/2021/08/11/async-await/index.html">
+<meta property="og:title" content="代理与反射">
+<meta property="og:url" content="https://rooneyzzz.github.io/myblog.github.io/2022/03/18/%E4%BB%A3%E7%90%86%E4%B8%8E%E5%8F%8D%E5%B0%84/index.html">
 <meta property="og:site_name" content="RooneyBlog">
-<meta property="og:description" content="一、是什么 异步操作的的处理方式，比Promise更加优化，简化了then链，用await代替，逻辑更加清晰 async 用于申明一个 function 是异步的，而 await 用于等待一个异步方法执行完成。">
+<meta property="og:description" content="代理、ES6新增  代理的作用：1.跟踪属性访问 2.隐藏属性 3.验证对象属性 4.验证函数参数 5.数据绑定与通信 1234567&#x2F;&#x2F; 创建代理const target &#x3D; &amp;#123;    id: &amp;#x27;target&amp;#x27;&amp;#125;const handler &amp;#123;&amp;#125;const proxy &#x3D; new Proxy(target,handler)  proxy只">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-08-11T14:05:45.000Z">
-<meta property="article:modified_time" content="2021-08-11T14:07:21.480Z">
+<meta property="og:image" content="https://rooneyzzz.github.io/myblog.github.io/myblog.github.io/2022/03/18/%E4%BB%A3%E7%90%86%E4%B8%8E%E5%8F%8D%E5%B0%84/Users/hp/AppData/Roaming/Typora/typora-user-images/image-20220318201654386.png">
+<meta property="article:published_time" content="2022-03-18T11:59:00.000Z">
+<meta property="article:modified_time" content="2022-03-18T13:39:54.533Z">
 <meta property="article:author" content="ZRJ">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rooneyzzz.github.io/myblog.github.io/myblog.github.io/2022/03/18/%E4%BB%A3%E7%90%86%E4%B8%8E%E5%8F%8D%E5%B0%84/Users/hp/AppData/Roaming/Typora/typora-user-images/image-20220318201654386.png">
   
     <link rel="alternative" href="/atom.xml" title="RooneyBlog" type="application/atom+xml">
   
@@ -157,20 +159,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-async-await" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-代理与反射" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      async&amp;await
+      代理与反射
     </h1>
   
 
         
-        <a href="/myblog.github.io/2021/08/11/async-await/" class="archive-article-date">
-  	<time datetime="2021-08-11T14:05:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-11</time>
+        <a href="/myblog.github.io/2022/03/18/%E4%BB%A3%E7%90%86%E4%B8%8E%E5%8F%8D%E5%B0%84/" class="archive-article-date">
+  	<time datetime="2022-03-18T11:59:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-18</time>
 </a>
         
       </header>
@@ -179,29 +181,28 @@
       
         
           
-            <p><strong>一、是什么</strong></p>
-<p>异步操作的的处理方式，比Promise更加优化，简化了then链，用await代替，逻辑更加清晰</p>
-<p><code>async</code> 用于申明一个 <code>function</code> 是异步的，而 <code>await</code> 用于等待一个异步方法执行完成。</p>
-<span id="more"></span>
+            <h1 id="代理、"><a href="#代理、" class="headerlink" title="代理、"></a>代理、</h1><p>ES6新增</p>
+<p><img src="/myblog.github.io/myblog.github.io/2022/03/18/%E4%BB%A3%E7%90%86%E4%B8%8E%E5%8F%8D%E5%B0%84/Users\hp\AppData\Roaming\Typora\typora-user-images\image-20220318201654386.png" alt="image-20220318201654386"></p>
+<h2 id="代理的作用："><a href="#代理的作用：" class="headerlink" title="代理的作用："></a>代理的作用：</h2><p>1.跟踪属性访问</p>
+<p>2.隐藏属性</p>
+<p>3.验证对象属性</p>
+<p>4.验证函数参数</p>
+<p>5.数据绑定与通信</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建代理</span></span><br><span class="line"><span class="keyword">const</span> target = &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="string">&#x27;target&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> handler &#123;&#125;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target,handler)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><strong>二、async</strong></p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">testAsync</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;hello async&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = testAsync();</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br></pre></td></tr></table></figure>
+<p>proxy只是目标对象的代理，并不在它的原型链上。</p>
+<h2 id="代理的目的："><a href="#代理的目的：" class="headerlink" title="代理的目的："></a>代理的目的：</h2><p>定义捕获器（可以理解为触发函数）</p>
+<p>如get()函数，*只有在代理对象上执行才会触发捕获器，在目标i对象上正常执行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建代理</span></span><br><span class="line"><span class="comment">// 捕获器函数可传入三个参数 1.目标对象 2.要查询的属性 3.代理对象</span></span><br><span class="line"><span class="keyword">const</span> target = &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="string">&#x27;target&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> handler &#123;</span><br><span class="line">    <span class="function"><span class="title">get</span>(<span class="params">trapTarget,property,receiver</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(trapTarget === target) <span class="comment">// true</span></span><br><span class="line">        <span class="built_in">console</span>.log(property)</span><br><span class="line">        <span class="built_in">console</span>.log(receiver === proxy) <span class="comment">// true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target,handler)</span><br><span class="line"><span class="built_in">console</span>.log(target.id) <span class="comment">// target</span></span><br></pre></td></tr></table></figure>
 
-<p>输出的是一个Promise对象，如果用传统Promise方法输出testAsync返回值，需要用到then：（当 <code>async</code> 函数没有返回值时，返回 <code>Promise.resolve(undefined)</code>）</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">testAsync().then(<span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v);    <span class="comment">// 输出 hello async</span></span><br><span class="line">&#125;);</span><br><span class="line">但是如果使用<span class="keyword">await</span>：</span><br><span class="line"><span class="keyword">const</span> result = <span class="keyword">await</span> testAsync();</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br></pre></td></tr></table></figure>
 
-<p>则可直接输出 hello async</p>
-<p><strong>三、await</strong></p>
-<p>﻿<strong><code>await</code>只能放在<code>async</code>函数内部使用</strong></p>
-<p><code>await</code> 用于一个异步操作之前，表示要“等待”这个异步操作的返回值。<br><code>await</code> 也可以用于一个同步的值。</p>
-<p>如果它等到的不是一个 <code>Promise</code> 对象，那 await 表达式的运算结果就是它等到的东西。<br>如果它等到的是一个 <code>Promise</code> 对象，<code>await</code> 就会阻塞后面的代码，等着 <code>Promise</code> 对象 <code>resolve</code>，然后得到 <code>resolve</code> 的值，作为 <code>await</code> 表达式的运算结果。</p>
-<p><strong>四、实例</strong></p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2s 之后返回双倍的值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doubleAfter2seconds</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            resolve(<span class="number">2</span> * num)</span><br><span class="line">        &#125;, <span class="number">2000</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">testResult</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;内部调用前&#x27;</span>) <span class="comment">// 2</span></span><br><span class="line">    <span class="keyword">let</span> result = <span class="keyword">await</span> doubleAfter2seconds(<span class="number">30</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(result); <span class="comment">// 4</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;内部调用后&#x27;</span>) <span class="comment">// 5</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;外部调用前&#x27;</span>) <span class="comment">// 1</span></span><br><span class="line">testResult();</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;外部调用后&#x27;</span>) <span class="comment">// 3</span></span><br><span class="line"><span class="comment">// --- 依次输出</span></span><br><span class="line"><span class="comment">// 外部调用前</span></span><br><span class="line"><span class="comment">// 内部调用前</span></span><br><span class="line"><span class="comment">// 外部调用后</span></span><br><span class="line"><span class="comment">// --- 2s 之后输出</span></span><br><span class="line"><span class="comment">// 60</span></span><br><span class="line"><span class="comment">// 内部调用后</span></span><br></pre></td></tr></table></figure>
 
-<p>如果没用<code>await</code>关键字，此后的执行顺序应该是：<code>内部调用后</code>，<code>外部调用后</code>，<code>2s 之后输出60，</code>因为异步方法不阻塞其他代码的执行，最后再输出<code>60</code><br>这里使用了<code>await</code>关键字，所以到这里后会等待异步返回结果，再往下执行。</p>
-<p>并且当<code>testResult</code>函数内部<code>await</code>阻塞执行后，不会影响到<code>testResult</code>函数外面执行</p>
-<p><strong>五、总结</strong></p>
-<p>使用async await可以让有异步操作的代码，执行输出顺序像是同步代码一样。</p>
+<h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><p>所有可以捕获的方法都有对应的反射API方法（Reflect）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">    <span class="function"><span class="title">get</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Relect.get</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个可以捕获所有方法的代理</span></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target,<span class="built_in">Reflect</span>)</span><br><span class="line"><span class="comment">// 若目标对象有不可配置的属性，则当捕获该属性修改后返回error</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>代理可撤销。但撤销操作不可逆。</p>
+<p>反射方法返回的一般为bool值，可使用 状态标记 重构反射函数，这样可以抛出error，方便debug</p>
+<h1 id="代理存在的问题"><a href="#代理存在的问题" class="headerlink" title="代理存在的问题"></a>代理存在的问题</h1><p>this问题，例如用weakMap，若实例使用目标对象作为weakMap的键，代理对象会尝试从自身取得这个实例。</p>
 
           
         
@@ -215,7 +216,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/myblog.github.io/categories/JS相关//" class="article-tag-list-link color5">JS相关</a>
+        			<a href="/myblog.github.io/categories/JS红宝书//" class="article-tag-list-link color1">JS红宝书</a>
         		</li>
       		
 		</ul>
@@ -270,7 +271,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://rooneyzzz.github.io/myblog.github.io/2021/08/11/async-await/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://rooneyzzz.github.io/myblog.github.io/2022/03/18/%E4%BB%A3%E7%90%86%E4%B8%8E%E5%8F%8D%E5%B0%84/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -284,18 +285,18 @@
   
 <nav id="article-nav">
   
-    <a href="/myblog.github.io/2021/08/12/axios%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/myblog.github.io/2022/03/18/%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          axios详细使用
+          迭代器与生成器
         
       </div>
     </a>
   
   
-    <a href="/myblog.github.io/2021/08/09/BFC%E5%B8%83%E5%B1%80/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">BFC布局</div>
+    <a href="/myblog.github.io/2021/08/12/axios%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">axios详细使用</div>
       <i class="icon-circle-right"></i>
     </a>
   
