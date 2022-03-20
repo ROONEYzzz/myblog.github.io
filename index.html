@@ -60,7 +60,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 11
+			总文章数 12
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -154,6 +154,92 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-BOM相关" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/myblog.github.io/2022/03/20/BOM%E7%9B%B8%E5%85%B3/">BOM相关</a>
+    </h1>
+  
+
+        
+        <a href="/myblog.github.io/2022/03/20/BOM%E7%9B%B8%E5%85%B3/" class="archive-article-date">
+  	<time datetime="2022-03-20T12:05:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+          
+            <h1 id="一、window对象"><a href="#一、window对象" class="headerlink" title="一、window对象"></a>一、window对象</h1><p>可用window.XXX的方法控制页面大小或页面视口位置，但是一般浏览器禁用了本页面的页面操作。但是可以控制新建窗口的属性。</p>
+<p>可用window.open()看是否返回null或用try\catch包装，查看浏览器是否禁用弹窗。</p>
+<h3 id="定时器："><a href="#定时器：" class="headerlink" title="定时器："></a>定时器：</h3><p>需要用箭头函数，否则this指向全局。</p>
+<p> JS在浏览器中是单线程执行。因此setTimeout()实现的是，将该任务在设定的秒数后放到<strong>任务队列</strong>中，<strong>并不是在设定的秒数后直接执行</strong>。</p>
+<p>setTimeout()返回一个该超时排期任务的唯一数字ID，可用clearTimeout()将该任务从队列中删除。</p>
+<p>setInterval()一般适用于执行时间短，非阻塞的回调。生产环境一般不用，因为无法保证任务执行时间，某些定时任务可能被跳过。</p>
+<h3 id="location对象"><a href="#location对象" class="headerlink" title="location对象"></a>location对象</h3><p>加载当前窗口文档信息。以及导航信息。location既是window属性也是document属性。</p>
+<p>location.assign在本页面进行页面跳转，window.open新增一个页面。</p>
+<p>除了hash外，修改location属性就会导致页面重新加载URL。</p>
+<h3 id="Navigator对象"><a href="#Navigator对象" class="headerlink" title="Navigator对象"></a>Navigator对象</h3><p>一般用于检测浏览器版本等等信息。<strong>检测插件</strong></p>
+<h3 id="Screen对象"><a href="#Screen对象" class="headerlink" title="Screen对象"></a>Screen对象</h3><p>检测显示器的配置信息。</p>
+<h3 id="history对象"><a href="#history对象" class="headerlink" title="history对象"></a>history对象</h3><p>用于网址前进或后退，url导航。</p>
+
+          
+        
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/myblog.github.io/categories/JS红宝书//" class="article-tag-list-link color1">JS红宝书</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/myblog.github.io/2022/03/20/BOM%E7%9B%B8%E5%85%B3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-迭代器与生成器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -849,80 +935,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/myblog.github.io/2021/08/05/Vue%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-获取url参数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/myblog.github.io/2021/08/05/%E8%8E%B7%E5%8F%96url%E5%8F%82%E6%95%B0/">获取url参数</a>
-    </h1>
-  
-
-        
-        <a href="/myblog.github.io/2021/08/05/%E8%8E%B7%E5%8F%96url%E5%8F%82%E6%95%B0/" class="archive-article-date">
-  	<time datetime="2021-08-05T08:07:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-          		<p><strong>一、url组成部分</strong></p>
-<p>例：<a target="_blank" rel="noopener" href="http://www.example.com/index.html#print?id=77&amp;nameid=2905210001&amp;page=1">http://www.example.com/index.html#print?id=77&amp;nameid=2905210001&amp;page=1</a><br>1.协议：http<br>2.域名：<a target="_blank" rel="noopener" href="http://www.example.com/">www.example.com</a><br>3.端口号：本机一般为 :8080<br>4.path： index.html#print</p>
-          
-        
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/myblog.github.io/categories/http相关//" class="article-tag-list-link color2">http相关</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/myblog.github.io/2021/08/05/%E8%8E%B7%E5%8F%96url%E5%8F%82%E6%95%B0/">展开全文 >></a>
         </p>
       
 
