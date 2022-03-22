@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://rooneyzzz.github.io/myblog.github.io">
-  <title>迭代器与生成器 | RooneyBlog</title>
+  <title>事件相关 | RooneyBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、解决问题迭代器for循环等遍历方法需要使用索引，当逻辑复杂时，代码可读性降低。 ES5新增了forEach，但是不够完善，无法中断遍历。 ES6新增了Symbol.iterator作为key，很多内置类型实现了该Iterable接口：string、array、set、map、arguments、DOM集合类型。 调用工厂函数可以生成一个迭代器： 12let str &#x3D; &amp;#x27;123&amp;#x">
+  <meta name="description" content="四种事件处理程序一、DOM0绑定事件步骤：get元素-&gt;元素.事件(例如：onclick) 二、DOM2绑定事件步骤：get元素-&gt;元素.addEventListener(“click”，()&#x3D;&gt;{}) 三、IE绑定事件步骤：get元素-&gt;元素.attachEvent(“onclick”，()&#x3D;&gt;{}) 三者区别：DOM0、DOM2：DOM2可以给一个事件绑定多次操作">
 <meta property="og:type" content="article">
-<meta property="og:title" content="迭代器与生成器">
-<meta property="og:url" content="https://rooneyzzz.github.io/myblog.github.io/2022/03/18/%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/index.html">
+<meta property="og:title" content="事件相关">
+<meta property="og:url" content="https://rooneyzzz.github.io/myblog.github.io/2022/03/22/%E4%BA%8B%E4%BB%B6%E7%9B%B8%E5%85%B3/index.html">
 <meta property="og:site_name" content="RooneyBlog">
-<meta property="og:description" content="一、解决问题迭代器for循环等遍历方法需要使用索引，当逻辑复杂时，代码可读性降低。 ES5新增了forEach，但是不够完善，无法中断遍历。 ES6新增了Symbol.iterator作为key，很多内置类型实现了该Iterable接口：string、array、set、map、arguments、DOM集合类型。 调用工厂函数可以生成一个迭代器： 12let str &#x3D; &amp;#x27;123&amp;#x">
+<meta property="og:description" content="四种事件处理程序一、DOM0绑定事件步骤：get元素-&gt;元素.事件(例如：onclick) 二、DOM2绑定事件步骤：get元素-&gt;元素.addEventListener(“click”，()&#x3D;&gt;{}) 三、IE绑定事件步骤：get元素-&gt;元素.attachEvent(“onclick”，()&#x3D;&gt;{}) 三者区别：DOM0、DOM2：DOM2可以给一个事件绑定多次操作">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-03-18T14:05:45.000Z">
-<meta property="article:modified_time" content="2022-03-18T11:46:59.109Z">
+<meta property="article:published_time" content="2022-03-22T13:05:45.000Z">
+<meta property="article:modified_time" content="2022-03-22T15:31:37.445Z">
 <meta property="article:author" content="ZRJ">
 <meta name="twitter:card" content="summary">
   
@@ -157,20 +157,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-迭代器与生成器" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-事件相关" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      迭代器与生成器
+      事件相关
     </h1>
   
 
         
-        <a href="/myblog.github.io/2022/03/18/%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/" class="archive-article-date">
-  	<time datetime="2022-03-18T14:05:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-18</time>
+        <a href="/myblog.github.io/2022/03/22/%E4%BA%8B%E4%BB%B6%E7%9B%B8%E5%85%B3/" class="archive-article-date">
+  	<time datetime="2022-03-22T13:05:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-22</time>
 </a>
         
       </header>
@@ -179,26 +179,23 @@
       
         
           
-            <h1 id="一、解决问题"><a href="#一、解决问题" class="headerlink" title="一、解决问题"></a>一、解决问题</h1><h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><p>for循环等遍历方法需要使用索引，当逻辑复杂时，代码可读性降低。</p>
-<p>ES5新增了forEach，但是不够完善，无法中断遍历。</p>
-<p>ES6新增了Symbol.iterator作为key，很多内置类型实现了该Iterable接口：string、array、set、map、arguments、DOM集合类型。</p>
-<p>调用工厂函数可以生成一个迭代器：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">&#x27;123&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(str[<span class="built_in">Symbol</span>.iterator]()); <span class="comment">// StringIterator()</span></span><br></pre></td></tr></table></figure>
-
-<p>实际代买中不需要显示调用这个工厂函数，如for-of循环，数组结构等会自动调用。</p>
-<p>迭代器协议：还有内容：{done：false，value：}  无内容： {done：true，value: undefined} 当done为true后，若继续调用next（）则done仍为true，value始终为undefined。</p>
-<p>创建自定义迭代器的时候可以使用闭包，否则迭代器的每个实例只能使用一次。（需显示调用工厂函数）</p>
-<p>可选用return()中止迭代器。或使用break等中止迭代器。</p>
-<h2 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h2><p>可生成自定义迭代器（比闭包实现更简洁），可以在一个函数块内暂停和恢复代码执行。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(n--)</span><br><span class="line">        <span class="keyword">yield</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>例：function * xxx</p>
-<p>生成器函数只会在初次调用next()后开始执行。</p>
-<p>使用yield中断执行 done：false</p>
-<p>使用return中断执行 done： true（即使用return后后面再next就无法读取值了）</p>
-<p>使用next恢复执行</p>
+            <h1 id="四种事件处理程序"><a href="#四种事件处理程序" class="headerlink" title="四种事件处理程序"></a>四种事件处理程序</h1><h4 id="一、DOM0"><a href="#一、DOM0" class="headerlink" title="一、DOM0"></a>一、DOM0</h4><p>绑定事件步骤：get元素-&gt;元素.事件(例如：onclick)</p>
+<h4 id="二、DOM2"><a href="#二、DOM2" class="headerlink" title="二、DOM2"></a>二、DOM2</h4><p>绑定事件步骤：get元素-&gt;元素.addEventListener(“click”，()=&gt;{})</p>
+<h4 id="三、IE"><a href="#三、IE" class="headerlink" title="三、IE"></a>三、IE</h4><p>绑定事件步骤：get元素-&gt;元素.attachEvent(“onclick”，()=&gt;{})</p>
+<h6 id="三者区别："><a href="#三者区别：" class="headerlink" title="三者区别："></a>三者区别：</h6><p>DOM0、DOM2：DOM2可以给一个事件绑定多次操作</p>
+<p>DOM、IE：DOM的this指向元素本身，IE的this指向全局window</p>
+<p>DOM0，IE 、DOM2： 后者的事件不需要加”on”DOM2为click，前者为onclick</p>
+<h6 id="共同点："><a href="#共同点：" class="headerlink" title="共同点："></a>共同点：</h6><p>默认冒泡</p>
+<h4 id="四、HTML事件处理"><a href="#四、HTML事件处理" class="headerlink" title="四、HTML事件处理"></a>四、HTML事件处理</h4><p>直接在标签上写事件 如：<div onclick></div></p>
+<p>不同浏览器的事件绑定兼容性写法：</p>
+<p>一般通过判断浏览器支持哪种属性，若支持addEventListener则使用，若支持attachEvent则使用，否则用DOM1写法。</p>
+<p>DOM事件对象默认为event</p>
+<h1 id="冒泡与捕获"><a href="#冒泡与捕获" class="headerlink" title="冒泡与捕获"></a>冒泡与捕获</h1><p>冒泡指从底层节点向上传播，捕获指事件从顶部向下传播。</p>
+<p>冒泡一般用于事件委托，捕获一般用于拦截事件。</p>
+<h1 id="内存与性能问题"><a href="#内存与性能问题" class="headerlink" title="内存与性能问题"></a>内存与性能问题</h1><p>页面整体性能与页面中事件处理程序的数量直接相关。每个对象都占用内存。有时内存中存在大量无用事件处理程序。</p>
+<p>解决方法：</p>
+<p>1、通过事件委托可以大量减少事件的绑定</p>
+<p>2、在删除元素的同时要删除事件处理程序，例如 添加 btn.onclick = null 防止内存中有无用的事件处理程序。</p>
 
           
         
@@ -267,7 +264,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://rooneyzzz.github.io/myblog.github.io/2022/03/18/%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://rooneyzzz.github.io/myblog.github.io/2022/03/22/%E4%BA%8B%E4%BB%B6%E7%9B%B8%E5%85%B3/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -281,18 +278,9 @@
   
 <nav id="article-nav">
   
-    <a href="/myblog.github.io/2022/03/20/BOM%E7%9B%B8%E5%85%B3/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          BOM相关
-        
-      </div>
-    </a>
   
-  
-    <a href="/myblog.github.io/2022/03/18/%E4%BB%A3%E7%90%86%E4%B8%8E%E5%8F%8D%E5%B0%84/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">代理与反射</div>
+    <a href="/myblog.github.io/2022/03/20/BOM%E7%9B%B8%E5%85%B3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">BOM相关</div>
       <i class="icon-circle-right"></i>
     </a>
   

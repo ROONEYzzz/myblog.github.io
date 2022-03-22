@@ -60,7 +60,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 12
+			总文章数 13
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -154,6 +154,97 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-事件相关" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/myblog.github.io/2022/03/22/%E4%BA%8B%E4%BB%B6%E7%9B%B8%E5%85%B3/">事件相关</a>
+    </h1>
+  
+
+        
+        <a href="/myblog.github.io/2022/03/22/%E4%BA%8B%E4%BB%B6%E7%9B%B8%E5%85%B3/" class="archive-article-date">
+  	<time datetime="2022-03-22T13:05:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+          
+            <h1 id="四种事件处理程序"><a href="#四种事件处理程序" class="headerlink" title="四种事件处理程序"></a>四种事件处理程序</h1><h4 id="一、DOM0"><a href="#一、DOM0" class="headerlink" title="一、DOM0"></a>一、DOM0</h4><p>绑定事件步骤：get元素-&gt;元素.事件(例如：onclick)</p>
+<h4 id="二、DOM2"><a href="#二、DOM2" class="headerlink" title="二、DOM2"></a>二、DOM2</h4><p>绑定事件步骤：get元素-&gt;元素.addEventListener(“click”，()=&gt;{})</p>
+<h4 id="三、IE"><a href="#三、IE" class="headerlink" title="三、IE"></a>三、IE</h4><p>绑定事件步骤：get元素-&gt;元素.attachEvent(“onclick”，()=&gt;{})</p>
+<h6 id="三者区别："><a href="#三者区别：" class="headerlink" title="三者区别："></a>三者区别：</h6><p>DOM0、DOM2：DOM2可以给一个事件绑定多次操作</p>
+<p>DOM、IE：DOM的this指向元素本身，IE的this指向全局window</p>
+<p>DOM0，IE 、DOM2： 后者的事件不需要加”on”DOM2为click，前者为onclick</p>
+<h6 id="共同点："><a href="#共同点：" class="headerlink" title="共同点："></a>共同点：</h6><p>默认冒泡</p>
+<h4 id="四、HTML事件处理"><a href="#四、HTML事件处理" class="headerlink" title="四、HTML事件处理"></a>四、HTML事件处理</h4><p>直接在标签上写事件 如：<div onclick></div></p>
+<p>不同浏览器的事件绑定兼容性写法：</p>
+<p>一般通过判断浏览器支持哪种属性，若支持addEventListener则使用，若支持attachEvent则使用，否则用DOM1写法。</p>
+<p>DOM事件对象默认为event</p>
+<h1 id="冒泡与捕获"><a href="#冒泡与捕获" class="headerlink" title="冒泡与捕获"></a>冒泡与捕获</h1><p>冒泡指从底层节点向上传播，捕获指事件从顶部向下传播。</p>
+<p>冒泡一般用于事件委托，捕获一般用于拦截事件。</p>
+<h1 id="内存与性能问题"><a href="#内存与性能问题" class="headerlink" title="内存与性能问题"></a>内存与性能问题</h1><p>页面整体性能与页面中事件处理程序的数量直接相关。每个对象都占用内存。有时内存中存在大量无用事件处理程序。</p>
+<p>解决方法：</p>
+<p>1、通过事件委托可以大量减少事件的绑定</p>
+<p>2、在删除元素的同时要删除事件处理程序，例如 添加 btn.onclick = null 防止内存中有无用的事件处理程序。</p>
+
+          
+        
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/myblog.github.io/categories/JS红宝书//" class="article-tag-list-link color1">JS红宝书</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/myblog.github.io/2022/03/22/%E4%BA%8B%E4%BB%B6%E7%9B%B8%E5%85%B3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-BOM相关" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -860,81 +951,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Vue响应式原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/myblog.github.io/2021/08/05/Vue%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/">Vue响应式原理</a>
-    </h1>
-  
-
-        
-        <a href="/myblog.github.io/2021/08/05/Vue%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/" class="archive-article-date">
-  	<time datetime="2021-08-05T15:09:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-          		<h2 id="一、概要"><a href="#一、概要" class="headerlink" title="一、概要"></a>一、概要</h2><p>响应式原理的表现形式： 数据更新时视图也跟着更新。</p>
-<p>优点： 避免了繁琐的DOM操作，只需要进行数据的管理。</p>
-<p>Vue响应式实现原理：通过1.Object.defineProperty方法中的getter，setter 2.观察者模式 来实现。</p>
-          
-        
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/myblog.github.io/categories/Vue相关//" class="article-tag-list-link color1">Vue相关</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/myblog.github.io/2021/08/05/Vue%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/">展开全文 >></a>
         </p>
       
 
