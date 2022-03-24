@@ -60,7 +60,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 13
+			总文章数 14
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -154,6 +154,126 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-网络请求&amp;远程资源" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/myblog.github.io/2022/03/24/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82&%E8%BF%9C%E7%A8%8B%E8%B5%84%E6%BA%90/">网络请求&amp;远程资源</a>
+    </h1>
+  
+
+        
+        <a href="/myblog.github.io/2022/03/24/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82&%E8%BF%9C%E7%A8%8B%E8%B5%84%E6%BA%90/" class="archive-article-date">
+  	<time datetime="2022-03-24T03:05:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+          
+            <h1 id="XHR"><a href="#XHR" class="headerlink" title="XHR"></a>XHR</h1><p>Ajax的关键技术，可以实现向服务器请求额外数据不刷新页面，实现更好的用户体验。</p>
+<p>使用代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(xhr.readyState === <span class="number">4</span>)&#123;</span><br><span class="line">        <span class="comment">// readyState 1:未初始化  2:已调用open()方法 3:已调用send()方法 4:完成</span></span><br><span class="line">        <span class="keyword">if</span>((xhr.status &gt;= <span class="number">200</span> &amp;&amp;xhr.status &lt;= <span class="number">300</span>) || xhr.status === <span class="number">304</span>)&#123;</span><br><span class="line">            alert(xhr.responseText)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            alert(xhr.status)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">xhr.open(<span class="string">&quot;get&quot;</span>,<span class="string">&quot;url&quot;</span>,<span class="literal">true</span>)<span class="comment">// true表示请求为异步请求 false表示同步请求</span></span><br><span class="line"><span class="comment">// url一般放域名后的信息，表示请求当前域下的信息，若想跨域需要写绝对路径，并且CORS设置了可以跨域。</span></span><br><span class="line"><span class="comment">// 若请求超时可以使用，超时后调用，readyState仍变为4</span></span><br><span class="line">xhr.timeout = <span class="number">1000</span></span><br><span class="line">xhr.ontimeout = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="string">&#x27;TIMEOUT&#x27;</span>)&#125;	</span><br><span class="line">xhr.send(<span class="literal">null</span>)</span><br><span class="line"><span class="comment">// send接收参数表示请求体数据，若没有必须填null</span></span><br></pre></td></tr></table></figure>
+
+<p>HTTP默认的请求头：</p>
+<p>Accept： 浏览器可处理的内容类型</p>
+<p>Accept-Charset： 字符集</p>
+<p>Accept-Encoding： 压缩编码类型</p>
+<p>Accept-language： 语言</p>
+<p>Connection： 与服务器连接类型</p>
+<p>Cookie、Host、Referer、User-Agent</p>
+<p>可以使用xhr.setRequestHeader（“myheader”，“myvalue”）自定义头部信息。</p>
+<h1 id="跨域技术"><a href="#跨域技术" class="headerlink" title="跨域技术"></a>跨域技术</h1><p>1、图片探测：</p>
+<p><strong>只能发送请求，无法接收相应。</strong>(单向通信)</p>
+<p>通过动态创建img标签，通过其onload和onerror事件来监测触发请求的时机。</p>
+<p>2、JSONP</p>
+<p>通过回调函数跨域加载资源。</p>
+<p><strong>实现浏览器和服务器双向通信</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建回调函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleResponse</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(response)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> script = <span class="built_in">document</span>.createElement(<span class="string">&quot;script&quot;</span>)</span><br><span class="line">script.src = <span class="string">&quot;xxxxxx/?callback=handleResponse&quot;</span></span><br><span class="line"><span class="built_in">document</span>.body.insertBefore(script,<span class="built_in">document</span>.body.firstChild)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>缺点：1、容易被在响应中加入恶意信息。2、不好确定是否请求失败，目前一般手写一个定时器，但这种方法不准确，因为不同用户的网速不一样。</p>
+<p>3、Fetch API</p>
+<p>目前最流行的方法，相比于XHR，fetch只能异步，返回的是一个promise对象。</p>
+<p><strong>也是双向通信</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fetch(<span class="string">&#x27;url&#x27;</span>).then(<span class="function">(<span class="params">response</span>)=&gt;</span>&#123;<span class="comment">// url的解释和XHR一样</span></span><br><span class="line">    <span class="built_in">console</span>.log(response)</span><br><span class="line">    <span class="built_in">console</span>.log(response.status) <span class="comment">// 可以检查状态码</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>相较于JSONP，fetch一定有返回，若请求失败，promise会被拒绝。</p>
+<p>fetch()函数可以设置第二个参数，该参数为一个对象，可以设置是否发送cookie，如何处理重定向响应等等。</p>
+<p>具体可配置参数：js红宝书p725</p>
+<p>fetch可以接收一个Request对象自动解析。如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> r = <span class="keyword">new</span> Request(<span class="string">&#x27;url&#x27;</span>,&#123;<span class="attr">method</span>:<span class="string">&#x27;POST&#x27;</span>,<span class="attr">body</span>:<span class="string">&#x27;xxx&#x27;</span>&#125;)</span><br><span class="line">fetch(r.clone()) <span class="comment">// 若想多次调用fetch包含相同的请求体，要先调用clone</span></span><br><span class="line">fetch(r)</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="web-socket"><a href="#web-socket" class="headerlink" title="web socket"></a>web socket</h1><p>目的是通过一个长连接实现与服务器的双向通信。，创建web socket后，会发一个HTTP请求初始化，然后切换协议为 Web Socket协议。 ws://  wss:// 而不是 http://</p>
+<p>优点：客户端和服务器可以发送较少的数据，不会对http造成负担。数据包更小，适用于移动应用。</p>
+<p>缺点：定义协议的时间较长</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 与XHR不同，web socket在初始化对象时立即创建连接，因此没有.open</span></span><br><span class="line"><span class="keyword">let</span> socket = <span class="keyword">new</span> WebSocket(<span class="string">&#x27;ws://www.example.com/xxxx&#x27;</span>)</span><br><span class="line">socket.send(<span class="string">&#x27;string&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="安全相关"><a href="#安全相关" class="headerlink" title="安全相关"></a>安全相关</h1><p>在未授权系统可以访问某个资源时，可以视为CSRF</p>
+<p>如何防护：</p>
+<p>1、要求通过SSL</p>
+<p>2、每个请求发送一个按约定算法计算的token</p>
+<p>3、设置验证码</p>
+
+          
+        
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/myblog.github.io/categories/JS红宝书//" class="article-tag-list-link color1">JS红宝书</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/myblog.github.io/2022/03/24/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82&%E8%BF%9C%E7%A8%8B%E8%B5%84%E6%BA%90/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-事件相关" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -875,82 +995,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/myblog.github.io/2021/08/07/webpack%E5%AD%A6%E4%B9%A0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vuex详细使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/">vuex详细使用</a>
-    </h1>
-  
-
-        
-        <a href="/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2021-08-06T04:13:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-          		<p>Vuex ：用于状态管理，采用集中式存储管理应用的所有组件状态</p>
-<p>状态管理： 理解为把需要多个组件共享的变量全部存储在一个对象里。 将该对象放入顶层vue实例中，让其他组件可以使用。（因此多个组件可以共享该对象的所有变量属性）</p>
-<p>优点： 如果自己封装这个对象，不能做到响应式，而vuejs最大的优势就是响应式，vuex可以达到这个效果</p>
-<p>vuex使用场景： 需要共享的状态信息：如用户登陆状态，购物车收藏等</p>
-          
-        
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/myblog.github.io/categories/Vue相关//" class="article-tag-list-link color1">Vue相关</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/myblog.github.io/2021/08/06/vuex%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8/">展开全文 >></a>
         </p>
       
 
